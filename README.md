@@ -1,4 +1,4 @@
-# ODIN Webpack Template
+# Webpack Template
 To intall packages run "npm i" 
 
 To run tests run "npm test"

@@ -22,13 +22,7 @@ Follow these steps to keep your forked repository up-to-date with the main repos
 2. **Pull the changes from the main repository:**
    ```bash
    git pull upstream main
-3. **Checkout to your fork's main branch:**
-   ```bash
-   git checkout main
-4. **Merge the changes from the main repository into your fork's main branch:**
-   ```bash
-   git merge upstream/main
-5. **Push the changes to your fork on GitHub:**
+3. **Push the changes to your fork on GitHub:**
    ```bash
    git push origin main
 

@@ -31,6 +31,3 @@ Follow these steps to keep your forked repository up-to-date with the main repos
 5. **Push the changes to your fork on GitHub:**
    ```bash
    git push origin main
-
-
-   

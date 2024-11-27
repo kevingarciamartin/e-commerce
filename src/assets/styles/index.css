@@ -1,0 +1,22 @@
+.product {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  max-width: 250px;
+}
+.productsContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+img {
+  max-width: 100%;
+}
+#search-bar {
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}

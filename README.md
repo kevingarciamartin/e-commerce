@@ -15,9 +15,9 @@ Follow these steps to keep your forked repository up-to-date with the main repos
 1. **Add the main repository as a remote:**
    ```bash
    git remote add upstream git@github.com:kevingarciamartin/e-commerce.git
-2. **Fetch the changes from the main repository:**
+2. **Pull the changes from the main repository:**
    ```bash
-   git fetch upstream
+   git pull upstream main
 3. **Checkout to your fork's main branch:**
    ```bash
    git checkout main

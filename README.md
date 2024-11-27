@@ -14,7 +14,11 @@ Follow these steps to keep your forked repository up-to-date with the main repos
 
 1. **Add the main repository as a remote:**
    ```bash
+   // SSH
    git remote add upstream git@github.com:kevingarciamartin/e-commerce.git
+
+   // HTTPS
+   git remote add upstream https://github.com/kevingarciamartin/e-commerce.git
 2. **Pull the changes from the main repository:**
    ```bash
    git pull upstream main

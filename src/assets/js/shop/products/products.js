@@ -1,6 +1,6 @@
-import { getProducts } from "./helpers";
+import "./products.css";
 
-export function displayProducts() {
+export function renderProducts() {
   const products = getProducts();
   const main = document.querySelector("main");
   const productsContainer = document.createElement("section");
@@ -24,4 +24,13 @@ export function displayProducts() {
     productsContainer.appendChild(productElement);
   });
   main.appendChild(productsContainer);
+}
+
+function getProducts() {
+  try {
+    const products = localStorage.getItem("products");
+    return JSON.parse(products);
+  } catch (error) {
+    console.error("There are no products in local storage", error);
+  }
 }

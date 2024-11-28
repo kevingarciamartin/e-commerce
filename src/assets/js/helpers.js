@@ -9,11 +9,7 @@ export function getDelayUntilNextMidnight() {
   return nextMidnight - now;
 }
 
-export function getProducts() {
-  try {
-    const products = localStorage.getItem("products");
-    return JSON.parse(products)
-  } catch (error) {
-    console.error("There are no products in local storage", error);
-  }
+export function resetMain() {
+  const main = document.querySelector("main");
+  main.innerHTML = "";
 }

@@ -1,6 +1,7 @@
 export function displayProducts(products) {
-  const productsContainer = document.getElementById("products-container"); // Get the container element
-  productsContainer.classList.add("productsContainer");
+  const main = document.querySelector("main");
+  const productsContainer = document.createElement("section"); // Create the container element
+  productsContainer.classList.add("products-container");
   productsContainer.innerHTML = "";
   products.forEach((product) => {
     const productElement = document.createElement("div");
@@ -14,4 +15,5 @@ export function displayProducts(products) {
         `;
     productsContainer.appendChild(productElement);
   });
+  main.appendChild(productsContainer);
 }

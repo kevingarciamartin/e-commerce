@@ -5,7 +5,7 @@ export function renderProducts() {
   const main = document.querySelector("main");
   const productsContainer = document.createElement("section");
 
-  productsContainer.classList.add("products-container");
+  productsContainer.classList.add("content-container");
 
   productsContainer.innerHTML = "";
 

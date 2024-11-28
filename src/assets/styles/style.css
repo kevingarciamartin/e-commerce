@@ -1,21 +1,80 @@
-.product {
-  border: 1px solid #ddd;
-  padding: 20px;
-  margin: 10px;
-  text-align: center;
-  max-width: 250px;
+:root {
+  /* Feel free to change values so that they match the intended design. Keep the structure of the variables */
+
+  /* Colors */
+  --clr-neutral-100: white;
+  --clr-neutral-200: #fafaf5;
+  --clr-neutral-300: #E6E6E6;
+  --clr-neutral-900: black;
+  --clr-green: #426B1F;
+
+  --clr-accent: var(--clr-green);
+  --clr-background: var(--clr-neutral-100);
+  --clr-border: var(--clr-neutral-300);
+  --clr-card: var(--clr-neutral-200);
+  --clr-text: var(--clr-neutral-900);
+
+  /* Font family */
+
+  /* Font sizes */
+  --fs-100: 16px;
+  --fs-200: 20px;
+  --fs-300: 24px;
+  --fs-400: 32px;
+  --fs-500: 58px;
+  --fs-600: 68px;
+
+  --fs-btn-large: var(--fs-300);
+  --fs-btn-small: var(--fs-100);
+  --fs-heading: var(--fs-500);
+  --fs-hero-heading: var(--fs-600);
+  --fs-logo: var(--fs-400);
+  --fs-product: var(--fs-200);
+  --fs-text: var(--fs-100);
+
+  /* Font weight */
 }
 
-.products-container {
+body {
+  padding-block: 100px;
+}
+
+header, footer {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+
+  background-color: var(--clr-background);
+
+  .logo-btn {
+    color: var(--clr-accent);
+    font-size: var(--fs-logo);
+  }
+
+  padding: 1rem 3rem;
 }
 
-#search-bar {
-  margin-bottom: 20px;
-  padding: 10px;
-  width: 100%;
-  max-width: 300px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
+header {
+  justify-content: space-between;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  
+  height: 100px;
+
+  #search-bar {
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 1rem;
+
+    list-style: none;
+  }
 }

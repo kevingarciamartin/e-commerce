@@ -8,7 +8,7 @@ import { renderCart } from "./cart/cart.js";
 
 export function app() {
   document.addEventListener("click", (event) => {
-    if (event.target.id === "logo-btn") {
+    if (event.target.classList.contains("logo-btn")) {
       renderHome();
     } else if (event.target.id === "shop-btn") {
       renderShop();

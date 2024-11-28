@@ -1,11 +1,3 @@
-import "./assets/styles/reset.css";
-import "./assets/styles/style.css";
-import { fetchProducts } from "./assets/js/fetch.js";
-import { displayProducts } from "./assets/js/displayProducts.js";
+import { app } from "./assets/js/app";
 
-const apiUrl = "https://fakestoreapi.com/products";
-
-fetchProducts(apiUrl).then((products) => {
-  console.log("Fetched products:", products);
-  displayProducts(products);
-});
+document.addEventListener("DOMContentLoaded", app);

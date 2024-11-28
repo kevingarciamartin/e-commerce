@@ -1,5 +1,3 @@
-import "../styles/style.css";
-
 export function displayProducts(products) {
   const productsContainer = document.getElementById("products-container"); // Get the container element
   productsContainer.classList.add("productsContainer");

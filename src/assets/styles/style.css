@@ -9,9 +9,7 @@
   display: flex;
   flex-wrap: wrap;
 }
-img {
-  max-width: 100%;
-}
+
 #search-bar {
   margin-bottom: 20px;
   padding: 10px;

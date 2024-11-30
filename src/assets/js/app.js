@@ -1,10 +1,10 @@
 import "../styles/reset.css";
 import "../styles/style.css";
 import { api } from "./api.js";
-import { renderHome } from "./home/home.js";
-import { renderShop } from "./shop/shop.js";
-import { renderMyProfile } from "./myProfile/myProfile.js";
-import { renderCart } from "./cart/cart.js";
+import { renderHome } from "./pages/home/home.js";
+import { renderShop } from "./pages/shop/shop.js";
+import { renderMyProfile } from "./pages/myProfile/myProfile.js";
+import { renderCart } from "./pages/cart/cart.js";
 
 export function app() {
   document.addEventListener("click", (event) => {

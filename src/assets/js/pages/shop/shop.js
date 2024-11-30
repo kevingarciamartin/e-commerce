@@ -1,6 +1,6 @@
 import "./shop.css";
-import { resetMain } from "../helpers.js";
-import { renderProducts } from "../products/products.js";
+import { resetMain } from "../../helpers.js";
+import { renderProducts } from "../../components/products/products.js";
 
 export function renderShop() {
   resetMain();

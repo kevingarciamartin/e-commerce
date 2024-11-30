@@ -1,4 +1,4 @@
-import { getDelayUntilNextMidnight } from "./helpers.js";
+import { getDelayUntilNextMidnight } from "./utils/helpers.js";
 
 export const api = (() => {
   async function storeProductsInLocalStorage() {

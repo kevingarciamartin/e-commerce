@@ -1,5 +1,5 @@
 import "./myProfile.css";
-import { resetMain } from "../helpers";
+import { resetMain } from "../../helpers";
 
 export function renderMyProfile() {
   resetMain();

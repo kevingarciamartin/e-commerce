@@ -1,0 +1,51 @@
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.heroimg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-heading {
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--clr-neutral-900);
+  font-size: var(--fs-600);
+  font-weight: 800;
+  font-family: var(--font-family-pop);
+  text-align: center;
+  z-index: 1;
+  width: 100%;
+  line-height: 1.2;
+}
+
+.hero-heading span {
+  display: inline-block;
+}
+
+.hero-button {
+  position: absolute;
+  top: 54%; /* Adjust this value to position the button vertically */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--clr-green);
+  font-family: var(--font-family-Inter);
+  color: white;
+  border: none;
+  border-radius: 17px;
+  padding: 10px 100px;
+  font-size: var(--fs-300);
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.hero-button:hover {
+  background-color: darkgreen; /* Optional: change color on hover */
+}

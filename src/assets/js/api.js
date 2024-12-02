@@ -1,4 +1,4 @@
-import { getDelayUntilNextMidnight } from "./utils/helpers.js";
+import { getDelayUntilNextMidnight, exampleCart, saveCartToStorage } from "./utils/helpers.js";
 
 export const api = (() => {
   async function storeProductsInLocalStorage() {
@@ -28,4 +28,6 @@ export const api = (() => {
   updateProductsInLocalStorage()
 })()
 
+// Kseniia: for testing only. To be deleted
+saveCartToStorage(exampleCart)
 

@@ -22,6 +22,8 @@ const sortByPrice = (array) => {
   });
 };
 
+const reverseArray = (array) => array.slice().reverse();
+
 // Helper function to convert price to a number or Infinity for invalid values
 const getPriceAsNumber = (price) => {
   if (typeof price === "number" && !isNaN(price)) {
@@ -33,4 +35,4 @@ const getPriceAsNumber = (price) => {
   return Infinity;
 };
 
-module.exports = { sortByTitle, sortByPrice };
+module.exports = { sortByTitle, sortByPrice, reverseArray };

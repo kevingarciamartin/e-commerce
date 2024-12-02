@@ -47,7 +47,7 @@ body {
     [content-end] var(--body-padding);
   grid-template-rows: 1fr auto;
 
-  padding-block: var(--header-height);
+  padding-block: var(--header-height) 0;
 }
 
 .content-container {
@@ -106,19 +106,23 @@ footer {
   grid-template-columns: subgrid;
   grid-column: 1 / -1;
 
-  padding-block: 1rem;
-
+  margin-block: 2rem 0;
+  
   .content-container {
     display: grid;
     grid-template-columns: subgrid;
     align-items: center;
 
+    padding-block: 2rem;
+    border-top: 1px solid var(--clr-border);
+
     .logo-btn {
       grid-column: span 2;
+      justify-self: start;
     }
 
     #license {
-      grid-column: 5 / span 4;
+      grid-column: 6 / span all;
     }
   }
 }

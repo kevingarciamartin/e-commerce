@@ -1,11 +1,14 @@
 import "./products.css";
+import { filterCategory } from "../../utils/filter";
 
-export function renderProducts() {
-  const products = getProducts();
+export function renderProducts(category = "all") {
+  const products = getProducts(category);
   const main = document.querySelector("main");
-  const productsContainer = document.createElement("section");
+  const contentContainer = document.createElement("section");
+  const productsContainer = document.createElement("div");
 
-  productsContainer.classList.add("content-container");
+  contentContainer.classList.add("content-container");
+  productsContainer.classList.add('products-container')
 
   productsContainer.innerHTML = "";
 
@@ -23,13 +26,20 @@ export function renderProducts() {
 
     productsContainer.appendChild(productElement);
   });
-  main.appendChild(productsContainer);
+
+  main.appendChild(contentContainer);
+  contentContainer.appendChild(productsContainer)
 }
 
-function getProducts() {
+function getProducts(category) {
   try {
-    const products = localStorage.getItem("products");
-    return JSON.parse(products);
+    let products = localStorage.getItem("products");
+    products = JSON.parse(products);
+
+    const filteredProducts =
+      category === "all" ? products : filterCategory(products, category);
+
+    return filteredProducts;
   } catch (error) {
     console.error("There are no products in local storage", error);
   }

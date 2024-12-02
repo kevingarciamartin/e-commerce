@@ -4,7 +4,7 @@ import { filterCategory } from "../../utils/filter";
 export function renderProducts(category = "all") {
   const products = getProducts(category);
   const contentContainer = document.querySelector("main .content-container");
-  const productsContainer = document.createElement("div");
+  const productsContainer = document.createElement("section");
 
   productsContainer.classList.add("products-container");
 

@@ -11,5 +11,7 @@ export function getDelayUntilNextMidnight() {
 
 export function resetMain() {
   const main = document.querySelector("main");
-  main.innerHTML = "";
+  main.innerHTML = `
+    <section class="content-container"></section>
+  `;
 }

@@ -1,12 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 :root {
   /* Feel free to change values so that they match the intended design. Keep the structure of the variables */
 
   /* Colors */
   --clr-neutral-100: white;
   --clr-neutral-200: #fafaf5;
-  --clr-neutral-300: #E6E6E6;
+  --clr-neutral-300: #e6e6e6;
   --clr-neutral-900: black;
-  --clr-green: #426B1F;
+  --clr-green: #426b1f;
 
   --clr-accent: var(--clr-green);
   --clr-background: var(--clr-neutral-100);
@@ -15,6 +19,12 @@
   --clr-text: var(--clr-neutral-900);
 
   /* Font family */
+
+  --font-family-Inter: "Inter", sans-serif;
+  --font-inter: var(--font-family-Inter);
+
+  --font-family-pop: "Poppins", sans-serif;
+  --font-pop: var(--font-family-pop);
 
   /* Font sizes */
   --fs-100: 16px;
@@ -41,25 +51,26 @@
 
 body {
   display: grid;
-  grid-template-columns: 
-    var(--body-padding) [content-start] 
+  grid-template-columns:
+    var(--body-padding) [content-start]
     repeat(12, 1fr)
     [content-end] var(--body-padding);
   grid-template-rows: 1fr auto;
 
-  padding-block: var(--header-height);
+  padding-block: var(--header-height) 0;
 }
 
 .content-container {
   grid-column: content-start / content-end;
 }
 
-header, footer {
+header,
+footer {
   display: flex;
   align-items: center;
 
   background-color: var(--clr-background);
-  
+
   .logo-btn {
     background-color: transparent;
     border: none;
@@ -70,15 +81,18 @@ header, footer {
 
 header {
   justify-content: space-between;
-  
+
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  
+
   height: var(--header-height);
   padding: 1rem 3rem;
-
+  /* Noory's Changes to main CSS files */
+  width: 100%;
+  z-index: 1000;
+  /* Noory's Changes to main CSS files */
   #search-bar {
     padding: 10px;
     width: 100%;
@@ -96,8 +110,12 @@ header {
 }
 
 main {
+  /* Noory's Changes to main CSS files */
   display: grid;
   grid-template-columns: subgrid;
+
+  /* Noory's Changes to main CSS files */
+
   grid-column: 1 / -1;
 }
 
@@ -106,19 +124,23 @@ footer {
   grid-template-columns: subgrid;
   grid-column: 1 / -1;
 
-  padding-block: 1rem;
+  margin-block: 2rem 0;
 
   .content-container {
     display: grid;
     grid-template-columns: subgrid;
     align-items: center;
 
+    padding-block: 2rem;
+    border-top: 1px solid var(--clr-border);
+
     .logo-btn {
       grid-column: span 2;
+      justify-self: start;
     }
 
     #license {
-      grid-column: 5 / span 4;
+      grid-column: 6 / span all;
     }
   }
 }

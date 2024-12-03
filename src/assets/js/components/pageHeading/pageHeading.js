@@ -21,6 +21,7 @@ export function renderPageHeading(title, showToolbar = false) {
 function createFilterAndSortToolbar() {
   // Filter by category
   const toolbarContainer = document.createElement("div");
+  const filterContainer = document.createElement("fieldset");
   const filterLabel = document.createElement("label");
   const categoryFilter = document.createElement("input");
   const categoryDatalist = document.createElement("datalist");
@@ -47,27 +48,31 @@ function createFilterAndSortToolbar() {
     categoryDatalist.appendChild(option);
   });
 
-  toolbarContainer.appendChild(filterLabel);
-  toolbarContainer.appendChild(categoryFilter);
-  toolbarContainer.appendChild(categoryDatalist);
+  toolbarContainer.appendChild(filterContainer);
+  filterContainer.appendChild(filterLabel);
+  filterContainer.appendChild(categoryFilter);
+  filterContainer.appendChild(categoryDatalist);
 
-  // Sort by title
+  // Buttons
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("page_heading__button-container");
+
   const sortByTitleButton = document.createElement("button");
   sortByTitleButton.classList.add("page-heading__toolbar-button");
   sortByTitleButton.textContent = "A-Z";
-  toolbarContainer.appendChild(sortByTitleButton);
+  buttonContainer.appendChild(sortByTitleButton);
 
-  // Sort by price
   const sortByPriceButton = document.createElement("button");
   sortByPriceButton.classList.add("page-heading__toolbar-button");
   sortByPriceButton.textContent = "Price";
-  toolbarContainer.appendChild(sortByPriceButton);
+  buttonContainer.appendChild(sortByPriceButton);
 
-  // Reverse order
   const reverseOrderButton = document.createElement("button");
   reverseOrderButton.classList.add("page-heading__toolbar-button");
   reverseOrderButton.textContent = "Reverse"; //TODO: Change to svg
-  toolbarContainer.appendChild(reverseOrderButton);
+  buttonContainer.appendChild(reverseOrderButton);
+
+  toolbarContainer.appendChild(buttonContainer);
 
   return toolbarContainer;
 }

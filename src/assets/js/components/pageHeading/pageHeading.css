@@ -1,0 +1,35 @@
+.page-heading-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid var(--clr-border);
+  margin-block: 2rem;
+  padding-block: 0.5rem;
+
+  h1 {
+    font-size: var(--fs-heading);
+    margin: 0;
+  }
+
+  .page-heading__toolbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 50vw;
+
+    fieldset {
+      display: flex;
+      gap: 1rem;
+
+      border: none;
+      padding: 0;
+    }
+
+    .page_heading__button-container {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+}

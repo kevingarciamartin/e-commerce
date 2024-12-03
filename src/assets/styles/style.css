@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap");
 
 :root {
   /* Feel free to change values so that they match the intended design. Keep the structure of the variables */
 
-  /* Colors */
+  /* Colors (clr)*/
   --clr-neutral-100: white;
   --clr-neutral-200: #fafaf5;
   --clr-neutral-300: #e6e6e6;
@@ -16,17 +16,22 @@
   --clr-background: var(--clr-neutral-100);
   --clr-border: var(--clr-neutral-300);
   --clr-card: var(--clr-neutral-200);
+  --clr-searchbar: var(--clr-neutral-200);
   --clr-text: var(--clr-neutral-900);
 
-  /* Font family */
+  /* Font family (ff)*/
+  --ff-inter: "Inter", sans-serif;
+  --ff-poppins: "Poppins", sans-serif;
+  --ff-newsreader: "Newsreader", serif;
 
-  --font-family-Inter: "Inter", sans-serif;
-  --font-inter: var(--font-family-Inter);
+  --ff-btn-large: var(--ff-inter);
+  --ff-btn-small: var(--ff-inter);
+  --ff-heading: var(--ff-poppins);
+  --ff-hero-heading: var(--ff-poppins);
+  --ff-logo: var(--ff-newsreader);
+  --ff-text: var(--ff-inter);
 
-  --font-family-pop: "Poppins", sans-serif;
-  --font-pop: var(--font-family-pop);
-
-  /* Font sizes */
+  /* Font sizes (fs)*/
   --fs-100: 16px;
   --fs-200: 20px;
   --fs-300: 24px;
@@ -42,7 +47,7 @@
   --fs-product: var(--fs-200);
   --fs-text: var(--fs-100);
 
-  /* Font weight */
+  /* Font weight (fw)*/
 
   /* Misc. */
   --body-padding: 3rem;
@@ -57,6 +62,7 @@ body {
     [content-end] var(--body-padding);
   grid-template-rows: 1fr auto;
 
+  font-family: var(--ff-inter);
   padding-block: var(--header-height) 0;
 }
 

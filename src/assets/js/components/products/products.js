@@ -3,10 +3,8 @@ import { filterCategory } from "../../utils/filter";
 
 export function renderProducts(category = "all") {
   const products = getProducts(category);
-  const main = document.querySelector("main");
-  const contentContainer = document.createElement("section");
-  const productsContainer = document.createElement("div");
-
+  const contentContainer = document.querySelector("main .content-container");
+  const productsContainer = document.createElement("section");
   contentContainer.classList.add("content-container");
   productsContainer.classList.add("products-container");
 
@@ -34,8 +32,6 @@ export function renderProducts(category = "all") {
 
     productsContainer.appendChild(productElement);
   });
-
-  main.appendChild(contentContainer);
   contentContainer.appendChild(productsContainer);
 }
 
@@ -50,5 +46,6 @@ function getProducts(category) {
     return filteredProducts;
   } catch (error) {
     console.error("There are no products in local storage", error);
+    return [];
   }
 }

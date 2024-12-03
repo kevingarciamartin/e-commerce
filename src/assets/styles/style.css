@@ -62,7 +62,7 @@ body {
     [content-end] var(--body-padding);
   grid-template-rows: 1fr auto;
 
-  font-family: var(--ff-inter);
+  font-family: var(--ff-text);
   padding-block: var(--header-height) 0;
 }
 

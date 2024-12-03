@@ -1,5 +1,3 @@
 import "./hero.css";
 
-export function renderHero() {
-    
-}
+export function renderHero() {}

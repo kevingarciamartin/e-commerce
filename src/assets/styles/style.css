@@ -4,9 +4,9 @@
   /* Colors */
   --clr-neutral-100: white;
   --clr-neutral-200: #fafaf5;
-  --clr-neutral-300: #E6E6E6;
+  --clr-neutral-300: #e6e6e6;
   --clr-neutral-900: black;
-  --clr-green: #426B1F;
+  --clr-green: #426b1f;
 
   --clr-accent: var(--clr-green);
   --clr-background: var(--clr-neutral-100);
@@ -41,8 +41,8 @@
 
 body {
   display: grid;
-  grid-template-columns: 
-    var(--body-padding) [content-start] 
+  grid-template-columns:
+    var(--body-padding) [content-start]
     repeat(12, 1fr)
     [content-end] var(--body-padding);
   grid-template-rows: 1fr auto;
@@ -54,12 +54,13 @@ body {
   grid-column: content-start / content-end;
 }
 
-header, footer {
+header,
+footer {
   display: flex;
   align-items: center;
 
   background-color: var(--clr-background);
-  
+
   .logo-btn {
     background-color: transparent;
     border: none;
@@ -70,12 +71,12 @@ header, footer {
 
 header {
   justify-content: space-between;
-  
+
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  
+
   height: var(--header-height);
   padding: 1rem 3rem;
 
@@ -107,7 +108,7 @@ footer {
   grid-column: 1 / -1;
 
   margin-block: 2rem 0;
-  
+
   .content-container {
     display: grid;
     grid-template-columns: subgrid;

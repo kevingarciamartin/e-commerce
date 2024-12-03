@@ -53,7 +53,7 @@ export function renderHero() {
   heroContainer.appendChild(img);
 
   if (main) {
-    main.appendChild(heroContainer);
+    main.prepend(heroContainer);
 
     // Start typing animation after a delay of 1 second (1000 ms)
     setTimeout(() => {

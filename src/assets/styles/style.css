@@ -111,8 +111,8 @@ header {
 
 main {
   /* Noory's Changes to main CSS files */
-  /* display: grid;
-  grid-template-columns: subgrid;*/
+  display: grid;
+  grid-template-columns: subgrid;
 
   /* Noory's Changes to main CSS files */
 

@@ -4,25 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kenvorisa</title>
+    <link rel="stylesheet" href="searchbar.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
       <button class="logo-btn">Kenvorisa</button>
-      <input type="text" id="search-bar">
+
+      <div class="search-bar">
+        <input
+          type="text"
+          id="search-bar"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button id="search-btn">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+
       <nav>
         <ul>
           <li><button id="shop-btn" class="nav-btn">Shop</button></li>
-          <li><button id="my-profile-btn" class="nav-btn">My profile</button></li>
-          <li><button id="cart-btn" class="nav-btn">Cart <span></span></button></li>
+          <li><button id="my-profile-btn" class="nav-btn">My Profile</button></li>
+          <li>
+            <button id="cart-btn" class="nav-btn cart-btn">Cart</button>
+          </li>
         </ul>
       </nav>
     </header>
-    <main></main>
+
+    <main>
+      <div id="results-container"></div>
+    </main>
+
     <footer>
       <div class="content-container">
         <button class="logo-btn">Kenvorisa</button>
-        <span id="license">© 2024 Kenvorisa AB. All rights reserved</span>
+        <span id="license">© 2024 Kenvorisa AB. All rights reserved.</span>
       </div>
     </footer>
+    <script src="searchbar.js"></script>
   </body>
 </html>

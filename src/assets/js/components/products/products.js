@@ -3,12 +3,10 @@ import { filterCategory } from "../../utils/filter";
 
 export function renderProducts(category = "all") {
   const products = getProducts(category);
-  const main = document.querySelector("main");
-  const contentContainer = document.createElement("section");
-  const productsContainer = document.createElement("div");
+  const contentContainer = document.querySelector("main .content-container");
+  const productsContainer = document.createElement("section");
 
-  contentContainer.classList.add("content-container");
-  productsContainer.classList.add('products-container')
+  productsContainer.classList.add("products-container");
 
   productsContainer.innerHTML = "";
 
@@ -18,17 +16,16 @@ export function renderProducts(category = "all") {
     productElement.classList.add("product");
 
     productElement.innerHTML = `
-            <h3>${product.title}</h3>
-            <p>${product.description}</p>
-            <img src="${product.image}" alt="${product.title}" width="200" />
-            <p><strong>Price:</strong> $${product.price}</p>
-        `;
+      <h3>${product.title}</h3>
+      <p>${product.description}</p>
+      <img src="${product.image}" alt="${product.title}" width="200" />
+      <p><strong>Price:</strong> $${product.price}</p>
+    `;
 
     productsContainer.appendChild(productElement);
   });
 
-  main.appendChild(contentContainer);
-  contentContainer.appendChild(productsContainer)
+  contentContainer.appendChild(productsContainer);
 }
 
 function getProducts(category) {
@@ -42,5 +39,6 @@ function getProducts(category) {
     return filteredProducts;
   } catch (error) {
     console.error("There are no products in local storage", error);
+    return [];
   }
 }

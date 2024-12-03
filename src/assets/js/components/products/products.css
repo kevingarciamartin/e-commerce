@@ -20,6 +20,7 @@
 .Add-to-cart-button {
   background-color: var(--clr-green);
   color: #fff;
+  font-family: var(--ff-inter);
   border: none;
   border-radius: 20px;
   font-size: var(--fs-100);
@@ -37,6 +38,7 @@
   flex-direction: column;
   align-items: flex-start;
   font-size: var(--fs-200);
+  font-family: var(--ff-inter);
   font-weight: 600;
 }
 .title-price p {
@@ -46,6 +48,7 @@
 .product h3 {
   width: 100%;
   white-space: normal;
+  font-family: var(--ff-inter);
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
@@ -67,6 +70,7 @@
 .product-description {
   font-size: var(--fs-100);
   font-weight: 400;
+  font-family: var(--ff-poppins);
   color: var(--clr-neutral-900);
   margin-top: 10px;
   line-height: 1.4;

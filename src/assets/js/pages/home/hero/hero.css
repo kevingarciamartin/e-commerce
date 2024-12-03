@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   height: auto;
+  z-index: 1;
 }
 
 .heroimg {
@@ -12,40 +13,89 @@
 
 .hero-heading {
   position: absolute;
-  top: 33%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: calc(23%); /* Adjust as needed */
+  left: calc(15%); /* Adjust this value based on your design */
   color: var(--clr-neutral-900);
-  font-size: var(--fs-600);
+  font-size: var(--fs-600); /* Base font size */
   font-weight: 800;
   font-family: var(--font-family-pop);
-  text-align: center;
-  z-index: 1;
-  width: 100%;
-  line-height: 1.2;
+  text-align: left; /* Align text to left */
 }
 
-.hero-heading span {
-  display: inline-block;
+.hero-heading-2 {
+  /* New class for the second line */
+  position: absolute; /* Position it absolutely */
+  top: calc(
+    45%
+  ); /* Adjust this value to move it up or down relative to first line */
+  left: calc(11%); /* Keep it aligned with first line */
+  color: var(--clr-neutral-900);
+  font-size: var(--fs-600); /* Base font size */
+  font-weight: 800;
+  font-family: var(--font-family-pop);
+}
+
+.line {
+  display: inline-block; /* Ensure each span behaves as an inline element */
 }
 
 .hero-button {
   position: absolute;
-  top: 54%; /* Adjust this value to position the button vertically */
-  left: 50%;
-  transform: translateX(-50%);
+  top: calc(56%); /* Position below the heading */
+  left: calc(50% - (50px)); /* Center button horizontally */
+  transform: translate(-50%, -50%);
   background-color: var(--clr-green);
   font-family: var(--font-family-Inter);
   color: white;
   border: none;
-  border-radius: 17px;
-  padding: 10px 100px;
-  font-size: var(--fs-300);
+  border-radius: 20px;
+  padding: 10px 100px; /* Adjust padding for larger screens */
+  font-size: var(--fs-300); /* Base button font size */
   font-weight: 600;
   cursor: pointer;
-  z-index: 1;
 }
 
+/* Hover effect */
 .hero-button:hover {
-  background-color: darkgreen; /* Optional: change color on hover */
+  background-color: darkgreen; /* Optional hover effect */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .hero-heading {
+    /* Apply similar adjustments to both lines if needed */
+    top: calc(27%);
+    left: calc(25%); /* Adjust heading position for smaller screens */
+    font-size: calc(var(--fs-400) * 0.8); /* Scale down font size */
+  }
+  .hero-heading-2 {
+    /* Apply similar adjustments to both lines if needed */
+    top: calc(41%); /* Adjust heading position for smaller screens */
+    font-size: calc(var(--fs-400) * 0.8); /* Scale down font size */
+  }
+
+  .hero-button {
+    top: calc(56%); /* Adjust button position for smaller screens */
+    left: calc(50%);
+    padding: 2px 27px; /* Reduce padding on mobile */
+    font-size: calc(var(--fs-200) * 0.8); /* Scale down button font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-heading {
+    top: calc(27%);
+    font-size: calc(var(--fs-300) * 0.6);
+  }
+
+  .hero-heading-2 {
+    top: calc(40%);
+    font-size: calc(var(--fs-300) * 0.6);
+  }
+
+  .hero-button {
+    top: calc(56%);
+    padding: 3px15px;
+    font-size: calc(var(--fs-100) * 0.6);
+  }
 }

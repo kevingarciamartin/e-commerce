@@ -39,6 +39,7 @@ function createFilterAndSortToolbar() {
 
   filterLabel.setAttribute("for", "page-heading__toolbar-category-filter");
   categoryFilter.setAttribute("list", "page-heading__toolbar-categories");
+  categoryFilter.setAttribute("placeholder", categories[0]);
 
   filterLabel.textContent = "Filter by category:";
 

@@ -24,8 +24,8 @@ export function renderShop() {
     }
   });
 
-  categoryFilter.addEventListener("click", (e) => {
-    e.target.nextElementSibling.classList.toggle("hidden");
+  categoryFilter.addEventListener("click", () => {
+    categoryDatalist.classList.toggle("hidden");
   });
 
   categoryOptions.forEach((option) => {

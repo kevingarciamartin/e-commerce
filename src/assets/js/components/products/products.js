@@ -1,5 +1,6 @@
 import "./products.css";
 import { filterCategory } from "../../utils/filter";
+import {addToCartFunction} from "../../utils/helpers"
 
 export function renderProducts(category = "all", limit = null) {
   const products = getProducts(category);
@@ -37,6 +38,9 @@ export function renderProducts(category = "all", limit = null) {
         <button class="Add-to-cart-button">Add to cart</button>
       </div>
     `;
+
+    // Add the event listener after setting innerHTML
+    productElement.querySelector('.Add-to-cart-button').addEventListener('click', () => addToCartFunction(product));
 
     // Add event listener for toggling description
     const svgInfo = productElement.querySelector(".svg-info");

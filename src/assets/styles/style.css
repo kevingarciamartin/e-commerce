@@ -48,6 +48,9 @@
   --fs-text: var(--fs-100);
 
   /* Font weight (fw)*/
+  --fw-regular: 400;
+
+  --fw-heading: var(--fw-regular);
 
   /* Misc. */
   --body-padding: 3rem;

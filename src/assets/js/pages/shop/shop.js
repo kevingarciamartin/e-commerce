@@ -19,13 +19,11 @@ export function renderShop() {
   );
 
   document.addEventListener("click", (e) => {
-    if (e.target.id !== "page-heading__toolbar-category-filter") {
-      categoryDatalist.classList.add('hidden')
+    if (categoryFilter.contains(e.target)) {
+      categoryDatalist.classList.toggle("hidden");
+    } else {
+      categoryDatalist.classList.add("hidden");
     }
-  });
-
-  categoryFilter.addEventListener("click", () => {
-    categoryDatalist.classList.toggle("hidden");
   });
 
   categoryOptions.forEach((option) => {

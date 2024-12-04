@@ -22,10 +22,40 @@
 
     fieldset {
       display: flex;
+      align-items: center;
       gap: 1rem;
+      
+      position: relative;
 
       border: none;
       padding: 0;
+    }
+
+    #page-heading__toolbar-category-filter {
+      cursor: pointer;
+    }
+
+    #page-heading__toolbar-categories {
+      display: grid;
+
+      position: absolute;
+      top: 0;
+      left: calc(100% + 0.5rem);
+      z-index: 1;
+
+      background-color: var(--clr-background);
+      border: 1px solid var(--clr-border);
+      border-radius: 1rem;
+
+      .page-heading__toolbar-category-option {
+        background: none;
+        border: none;
+        padding: 1rem;
+
+        &:hover {
+          background-color: var(--clr-card);
+        }
+      }
     }
 
     .page_heading__button-container {
@@ -33,4 +63,8 @@
       gap: 1rem;
     }
   }
+}
+
+.hidden {
+  display: none !important; 
 }

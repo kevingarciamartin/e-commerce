@@ -24,11 +24,11 @@ function createFilterAndSortToolbar() {
   const filterContainer = document.createElement("fieldset");
   const filterLabel = document.createElement("label");
   const categoryFilter = document.createElement("input");
-  const categoryDatalist = document.createElement("datalist");
+  const categoryDatalist = document.createElement("div");
   const categories = [
     "All",
     "Electronics",
-    "Jewelry",
+    "Jewelery",
     "Men's clothing",
     "Women's clothing",
   ];
@@ -36,16 +36,20 @@ function createFilterAndSortToolbar() {
   toolbarContainer.classList.add("page-heading__toolbar-container");
   categoryFilter.id = "page-heading__toolbar-category-filter";
   categoryDatalist.id = "page-heading__toolbar-categories";
+  categoryDatalist.classList.add("hidden");
 
   filterLabel.setAttribute("for", "page-heading__toolbar-category-filter");
   categoryFilter.setAttribute("list", "page-heading__toolbar-categories");
   categoryFilter.setAttribute("placeholder", categories[0]);
+  categoryFilter.readOnly = true;
 
   filterLabel.textContent = "Filter by category:";
+  categoryFilter.value = categories[0];
 
   categories.forEach((category) => {
-    const option = document.createElement("option");
-    option.value = category;
+    const option = document.createElement("button");
+    option.classList.add("page-heading__toolbar-category-option");
+    option.textContent = category;
     categoryDatalist.appendChild(option);
   });
 
@@ -56,7 +60,7 @@ function createFilterAndSortToolbar() {
 
   // Buttons
   const buttonContainer = document.createElement("div");
-  buttonContainer.classList.add("page_heading__button-container");
+  buttonContainer.classList.add("page-heading__button-container");
 
   const sortByTitleButton = document.createElement("button");
   sortByTitleButton.classList.add("page-heading__toolbar-button");

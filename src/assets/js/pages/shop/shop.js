@@ -11,9 +11,18 @@ export function renderShop() {
   const categoryFilter = document.querySelector(
     "#page-heading__toolbar-category-filter"
   );
+  const categoryDatalist = document.querySelector(
+    "#page-heading__toolbar-categories"
+  );
   const categoryOptions = document.querySelectorAll(
     ".page-heading__toolbar-category-option"
   );
+
+  document.addEventListener("click", (e) => {
+    if (e.target.id !== "page-heading__toolbar-category-filter") {
+      categoryDatalist.classList.add('hidden')
+    }
+  });
 
   categoryFilter.addEventListener("click", (e) => {
     e.target.nextElementSibling.classList.toggle("hidden");
@@ -24,11 +33,11 @@ export function renderShop() {
       const productsContainer = document.querySelector(
         "main .products-container"
       );
-      const categoryDatalist = document.querySelector(
-        "#page-heading__toolbar-categories"
+      const currentCategory = document.querySelector(
+        "#page-heading__toolbar-current-category"
       );
       const selectedCategory = e.target.textContent;
-      categoryFilter.value = selectedCategory;
+      currentCategory.textContent = selectedCategory;
       productsContainer.innerHTML = "";
       renderProducts(selectedCategory.toLowerCase());
       categoryDatalist.classList.add("hidden");

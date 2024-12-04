@@ -24,7 +24,6 @@ function createFilterAndSortToolbar() {
   const filterContainer = document.createElement("fieldset");
   const filterLabel = document.createElement("label");
   const categoryFilter = document.createElement("div");
-  const categoryCurrent = document.createElement("span");
   const categoryDatalist = document.createElement("div");
   const categories = [
     "All",
@@ -36,7 +35,6 @@ function createFilterAndSortToolbar() {
 
   toolbarContainer.classList.add("page-heading__toolbar-container");
   categoryFilter.id = "page-heading__toolbar-category-filter";
-  categoryCurrent.id = "page-heading__toolbar-current-category";
   categoryDatalist.id = "page-heading__toolbar-categories";
   categoryDatalist.classList.add("hidden");
 

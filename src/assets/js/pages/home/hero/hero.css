@@ -19,7 +19,7 @@
   color: var(--clr-neutral-900);
   font-size: var(--fs-600); /* Base font size */
   font-weight: 800;
-  font-family: var(--font-family-pop);
+  font-family: var(--ff-poppins);
   text-align: left; /* Align text to left */
 }
 
@@ -33,7 +33,7 @@
   color: var(--clr-neutral-900);
   font-size: var(--fs-600); /* Base font size */
   font-weight: 800;
-  font-family: var(--font-family-pop);
+  font-family: var(--ff-poppins);
 }
 
 .line {
@@ -46,7 +46,7 @@
   left: calc(50% - (50px)); /* Center button horizontally */
   transform: translate(-50%, -50%);
   background-color: var(--clr-green);
-  font-family: var(--font-family-Inter);
+  font-family: var(--ff-inter);
   color: white;
   border: none;
   border-radius: 20px;

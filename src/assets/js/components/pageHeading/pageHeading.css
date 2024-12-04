@@ -10,6 +10,7 @@
   h1 {
     font-family: var(--ff-heading);
     font-size: var(--fs-heading);
+    font-weight: var(--fw-heading);
     margin: 0;
   }
 
@@ -29,18 +30,31 @@
 
       border: none;
       padding: 0;
+
+      label {
+        flex-shrink: 0;
+      }
     }
 
     #page-heading__toolbar-category-filter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border: 1px solid var(--clr-border);
+      border-radius: 99rem;
       cursor: pointer;
+      flex-shrink: 0;
+      padding: 0.5rem 1rem;
+      width: 15rem;
     }
 
     #page-heading__toolbar-categories {
       display: grid;
 
       position: absolute;
-      top: 0;
-      left: calc(100% + 0.5rem);
+      top: calc(100% + 0.25rem);
+      left: calc(50%);
       z-index: 1;
 
       background-color: var(--clr-background);

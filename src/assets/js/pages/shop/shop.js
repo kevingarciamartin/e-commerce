@@ -6,8 +6,11 @@ import { renderProducts } from "../../components/products/products.js";
 export function renderShop() {
   resetMain();
   renderPageHeading("Our products", true);
-  renderProducts("all");
+  renderProducts();
+  handleEventlisteners();
+}
 
+function handleEventlisteners() {
   const categoryFilter = document.querySelector(
     "#page-heading__toolbar-category-filter"
   );

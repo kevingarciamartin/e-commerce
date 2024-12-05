@@ -9,7 +9,7 @@
   border: 1px solid #ddd;
   padding: 1rem;
   border-radius: 24px;
-  width: 263px;
+  max-width: 263px;
 }
 .svg-info {
   fill: var(--clr-green);
@@ -47,15 +47,16 @@
 }
 .product h3 {
   width: 100%;
-  white-space: normal;
+  white-space: nowrap;
   font-family: var(--ff-inter);
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: clip;
   display: block;
   line-height: 1.5em;
   max-height: 3em;
   font-size: var(--fs-200);
   margin-bottom: 0px;
+  word-wrap: break-word;
 }
 .product img {
   width: 100%;

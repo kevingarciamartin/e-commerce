@@ -1,18 +1,29 @@
-import "./products.css";
-import { filterCategory } from "../../utils/filter";
+import "./homeproducts.css";
+import { renderShop } from "../../shop/shop.js";
 
-export function renderProducts(category = "all") {
-  const products = getProducts(category); // Get all products based on the provided category
+export function homeProducts() {
+  const contentContainer = document.querySelector(".content-container");
+  const HomeProductsContainer = document.createElement("div");
+  HomeProductsContainer.classList.add("home-products-container");
 
-  const contentContainer = document.querySelector("main .content-container");
-  const productsContainer = document.createElement("section");
-  contentContainer.classList.add("content-container");
-  productsContainer.classList.add("products-container");
+  const title = document.createElement("h1");
+  title.textContent = "Better choices, better prices";
+  title.classList.add("home-products-title");
+  HomeProductsContainer.appendChild(title);
 
-  productsContainer.innerHTML = ""; // Clear any previous content inside productsContainer
+  const products = getProducts("all"); // Get all products (from the "all" category)
 
-  // Loop through all the products and create HTML for each one
-  products.forEach((product) => {
+  // Limit the number of products to 8
+  const limitedProducts = products.slice(0, 8); // Always take the first 8 products
+
+  const homeproduct = document.createElement("div");
+  homeproduct.classList.add("homeproduct");
+  HomeProductsContainer.appendChild(homeproduct);
+
+  homeproduct.innerHTML = ""; // Clear any previous content inside productsContainer
+
+  // Loop through the limited products and create HTML for each one
+  limitedProducts.forEach((product) => {
     const productElement = document.createElement("div");
     productElement.classList.add("product");
 
@@ -54,11 +65,18 @@ export function renderProducts(category = "all") {
     });
 
     // Append the product to the container
-    productsContainer.appendChild(productElement);
+    homeproduct.appendChild(productElement);
   });
 
-  // Append the products container to the content container
-  contentContainer.appendChild(productsContainer);
+  const button = document.createElement("button");
+  button.textContent = "See more products";
+  button.classList.add("home-products-button");
+  button.addEventListener("click", () => {
+    renderShop();
+  });
+  HomeProductsContainer.appendChild(button);
+
+  contentContainer.append(HomeProductsContainer);
 }
 
 function getProducts(category) {

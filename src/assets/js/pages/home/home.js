@@ -1,10 +1,10 @@
 import "./home.css";
 import { resetMain } from "../../utils/helpers";
 import { renderHero } from "./hero/hero";
-import { renderProducts } from "../../components/products/products.js";
+import { homeProducts } from "./homeproducts/homeproducts";
 
 export function renderHome() {
   resetMain();
   renderHero();
-  renderProducts("all", 8);
+  homeProducts("all", 8);
 }

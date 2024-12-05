@@ -1,7 +1,5 @@
 import {
   getDelayUntilNextMidnight,
-  exampleCart,
-  saveCartToStorage,
 } from "./utils/helpers.js";
 
 export const api = (() => {
@@ -32,4 +30,4 @@ export const api = (() => {
 })();
 
 // Kseniia: for testing only. To be deleted
-saveCartToStorage(exampleCart);
+// saveCartToStorage(exampleCart);

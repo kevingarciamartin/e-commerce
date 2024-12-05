@@ -9,6 +9,7 @@
   --clr-neutral-100: white;
   --clr-neutral-200: #fafaf5;
   --clr-neutral-300: #e6e6e6;
+  --clr-neutral-400: #b7b7b7;
   --clr-neutral-900: black;
   --clr-green: #426b1f;
 
@@ -48,6 +49,9 @@
   --fs-text: var(--fs-100);
 
   /* Font weight (fw)*/
+  --fw-regular: 400;
+
+  --fw-heading: var(--fw-regular);
 
   /* Misc. */
   --body-padding: 3rem;
@@ -81,7 +85,9 @@ footer {
     background-color: transparent;
     border: none;
     color: var(--clr-accent);
+    font-family: var(--ff-logo);
     font-size: var(--fs-logo);
+    font-weight: 600;
   }
 }
 
@@ -95,10 +101,10 @@ header {
 
   height: var(--header-height);
   padding: 1rem 3rem;
-
+  /* Noory's Changes to main CSS files */
   width: 100%;
   z-index: 1000;
-
+  /* Noory's Changes to main CSS files */
   #search-bar {
     padding: 10px;
     width: 100%;
@@ -109,15 +115,45 @@ header {
 
   nav ul {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
 
     list-style: none;
+  }
+
+  li {
+    align-self: center;
+  }
+
+  .nav-btn {
+    font-family: var(--ff-inter);
+    font-size: 16px;
+    border: 0;
+  }
+
+  #shop-btn,
+  #my-profile-btn {
+    border: none;
+    background-color: white;
+    align-self: center;
+  }
+
+  #cart-btn {
+    padding: 13.5px 32px 13.5px 33px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: var(--clr-green);
+    color: white;
   }
 }
 
 main {
   display: grid;
   grid-template-columns: subgrid;
+
+  /* Noory's Changes to main CSS files */
+
   grid-column: 1 / -1;
 }
 
@@ -133,16 +169,68 @@ footer {
     grid-template-columns: subgrid;
     align-items: center;
 
-    padding-block: 2rem;
+    padding-block: 1.75rem 2rem;
     border-top: 1px solid var(--clr-border);
 
     .logo-btn {
       grid-column: span 2;
       justify-self: start;
+      padding-block: 0.25rem 0;
     }
 
     #license {
       grid-column: 6 / span all;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 1rem;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  header #search-bar {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 1rem;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  header li {
+    align-self: flex-start;
+  }
+
+  header #cart-btn {
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  footer .content-container {
+    grid-template-columns: 1fr;
+    padding-block: 1rem;
+    text-align: center;
+  }
+
+  footer .logo-btn {
+    grid-column: auto;
+    justify-self: center;
+    margin-bottom: 1rem;
   }
 }

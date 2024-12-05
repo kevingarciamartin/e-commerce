@@ -1,156 +1,186 @@
 import "./checkout.css";
-import "../../../styles/style.css";
-import { resetMain } from "../../utils/helpers.js";
+import "../../components/orderSummary/orderSummary.css";
+import { resetMain, loadCartFromStorage } from "../../utils/helpers.js";
+import {
+  calculateTotal,
+  createOrderSummaryCard,
+} from "../../components/orderSummary/orderSummary.js";
+import { renderPageHeading } from "../../components/pageHeading/pageHeading.js";
 
-export function renderCheckout() {
+export function renderCheckout(cart = []) {
   resetMain();
-  const main = document.querySelector("main");
+
+  renderPageHeading("Checkout");
+
+  if (!cart || cart.length === 0) {
+    cart = loadCartFromStorage();
+  }
+
+  const main = document.querySelector("main .content-container");
   const checkoutContainer = document.createElement("section");
+  main.appendChild(checkoutContainer);
 
-  const checkout = document.createElement("h1");
-  checkout.textContent = "Checkout";
-  checkoutContainer.appendChild(checkout);
-
+  // First section
   const delivery = document.createElement("h2");
   delivery.textContent = "1. Enter delivery address";
   checkoutContainer.appendChild(delivery);
 
-  const form = document.createElement("form");
-  form.setAttribute("method", "post");
+  const addressSection = document.createElement("div");
+  addressSection.classList.add("address-section");
 
-  const firstName1 = document.createElement("label");
-  firstName1.setAttribute("for", "first_name");
-  firstName1.textContent = "First name*";
-  form.appendChild(firstName1);
+  const addressFields = [
+    { id: "first-name", label: "First name*" },
+    { id: "last-name", label: "Last name*" },
+    { id: "email", label: "E-mail address*" },
+    { id: "phone", label: "Phone number*" },
+    { id: "address", label: "Delivery address*" },
+    { id: "postal", label: "Postal code*" },
+    { id: "city", label: "City*" },
+    { id: "country", label: "Country*" },
+  ];
 
-  const firstName2 = document.createElement("input");
-  firstName2.setAttribute("type", "text");
-  firstName2.setAttribute("name", "first_name");
-  firstName2.setAttribute("required", true);
-  form.appendChild(firstName2);
+  addressFields.forEach((field) => {
+    const fieldWrapper = document.createElement("div");
+    fieldWrapper.classList.add("field-wrapper");
 
-  const lastName1 = document.createElement("label");
-  lastName1.setAttribute("for", "last_name");
-  lastName1.textContent = "Last name*";
-  form.appendChild(lastName1);
+    const label = document.createElement("label");
+    label.setAttribute("for", field.id);
+    label.textContent = field.label;
 
-  const lastName2 = document.createElement("input");
-  lastName2.setAttribute("type", "text");
-  lastName2.setAttribute("name", "last_name");
-  lastName2.setAttribute("required", true);
-  form.appendChild(lastName2);
+    const input = document.createElement("input");
+    input.type = "text";
+    input.id = field.id;
+    input.required = true;
 
-  const email1 = document.createElement("label");
-  email1.setAttribute("for", "email");
-  email1.textContent = "E-mail address*";
-  form.appendChild(email1);
+    fieldWrapper.appendChild(label);
+    fieldWrapper.appendChild(input);
+    addressSection.appendChild(fieldWrapper);
+  });
 
-  const email2 = document.createElement("input");
-  email2.setAttribute("type", "text");
-  email2.setAttribute("name", "email");
-  email2.setAttribute("required", true);
-  form.appendChild(email2);
+  checkoutContainer.appendChild(addressSection);
 
-  const phone1 = document.createElement("label");
-  phone1.setAttribute("for", "phone");
-  phone1.textContent = "Phone number*";
-  form.appendChild(phone1);
-
-  const phone2 = document.createElement("input");
-  phone2.setAttribute("type", "text");
-  phone2.setAttribute("name", "phone");
-  phone2.setAttribute("required", true);
-  form.appendChild(phone2);
-
-  const address1 = document.createElement("label");
-  address1.setAttribute("for", "address");
-  address1.textContent = "Delivery address*";
-  form.appendChild(address1);
-
-  const address2 = document.createElement("input");
-  address2.setAttribute("type", "text");
-  address2.setAttribute("name", "address");
-  address2.setAttribute("required", true);
-  form.appendChild(address2);
-
-  const post1 = document.createElement("label");
-  post1.setAttribute("for", "postal_code");
-  post1.textContent = "Postal code*";
-  form.appendChild(post1);
-
-  const post2 = document.createElement("input");
-  post2.setAttribute("type", "text");
-  post2.setAttribute("name", "postal_code");
-  post2.setAttribute("required", true);
-  form.appendChild(post2);
-
-  const city1 = document.createElement("label");
-  city1.setAttribute("for", "city");
-  city1.textContent = "City*";
-  form.appendChild(city1);
-
-  const city2 = document.createElement("input");
-  city2.setAttribute("type", "text");
-  city2.setAttribute("name", "city");
-  city2.setAttribute("required", true);
-  form.appendChild(city2);
-
-  const country1 = document.createElement("label");
-  country1.setAttribute("for", "country");
-  country1.textContent = "Country*";
-  form.appendChild(country1);
-
-  const country2 = document.createElement("input");
-  country2.setAttribute("type", "text");
-  country2.setAttribute("name", "country");
-  country2.setAttribute("required", true);
-  form.appendChild(country2);
-
-  checkoutContainer.appendChild(form);
-
+  // Second section
   const payment = document.createElement("h2");
   payment.textContent = "2. Select payment method";
+  payment.setAttribute("class", "payment-heading");
   checkoutContainer.appendChild(payment);
 
-  const card1 = document.createElement("label");
-  card1.setAttribute("for", "card");
-  card1.textContent = "Card";
-  checkoutContainer.appendChild(card1);
+  const paymentSection = document.createElement("div");
+  paymentSection.classList.add("payment-section");
 
-  const card2 = document.createElement("input");
-  card2.setAttribute("type", "radio");
-  card2.setAttribute("name", "card");
-  checkoutContainer.appendChild(card2);
+  const paymentMethods = ["Card", "Klarna", "PayPal", "Swish"];
+  paymentMethods.forEach((method) => {
+    const radioWrapper = document.createElement("div");
+    radioWrapper.classList.add("radio-wrapper");
 
-  const klarna1 = document.createElement("label");
-  klarna1.setAttribute("for", "klarna");
-  klarna1.textContent = "Card";
-  checkoutContainer.appendChild(klarna1);
+    const radioInput = document.createElement("input");
+    radioInput.type = "radio";
+    radioInput.id = method.toLowerCase();
+    radioInput.name = "payment";
+    radioInput.value = method.toLowerCase();
 
-  const klarna2 = document.createElement("input");
-  klarna2.setAttribute("type", "radio");
-  klarna2.setAttribute("name", "klarna");
-  checkoutContainer.appendChild(klarna2);
+    const radioLabel = document.createElement("label");
+    radioLabel.setAttribute("for", method.toLowerCase());
+    radioLabel.textContent = method;
 
-  const paypal1 = document.createElement("label");
-  paypal1.setAttribute("for", "paypal");
-  paypal1.textContent = "PayPal";
-  checkoutContainer.appendChild(paypal1);
+    radioWrapper.appendChild(radioInput);
+    radioWrapper.appendChild(radioLabel);
+    paymentSection.appendChild(radioWrapper);
+  });
 
-  const paypal2 = document.createElement("input");
-  paypal2.setAttribute("type", "radio");
-  paypal2.setAttribute("name", "google");
-  checkoutContainer.appendChild(paypal2);
+  checkoutContainer.appendChild(paymentSection);
 
-  const google1 = document.createElement("label");
-  google1.setAttribute("for", "paypal");
-  google1.textContent = "Google Pay";
-  checkoutContainer.appendChild(google1);
+  //Third section
+  const purchase = document.createElement("h2");
+  purchase.textContent = "3. Complete purchase";
+  checkoutContainer.appendChild(purchase);
 
-  const google2 = document.createElement("input");
-  google2.setAttribute("type", "radio");
-  google2.setAttribute("name", "google");
-  checkoutContainer.appendChild(google2);
+  const summaryDiv = document.createElement("div");
+  summaryDiv.classList.add("summary-card");
 
-  main.appendChild(checkoutContainer);
+  const modalButton = document.createElement("button");
+  modalButton.textContent = "Pay now";
+  modalButton.type = "button";
+  modalButton.className = "modal-button";
+  modalButton.disabled = true;
+
+  function handlePayNow() {
+    alert("Thank you for shopping with us!");
+  }
+  modalButton.addEventListener("click", handlePayNow);
+
+  const shippingCost = 9.99;
+  const orderSummaryCard = createOrderSummaryCard(
+    cart,
+    "Pay now",
+    handlePayNow,
+    modalButton
+  );
+
+  const shippingLine = orderSummaryCard.querySelector(
+    ".summary-line:nth-child(3) span:last-child"
+  );
+  const totalLine = orderSummaryCard.querySelector(
+    ".summary-line.total span:last-child"
+  );
+
+  const updateOrderSummary = () => {
+    const subtotal = calculateTotal(cart);
+    shippingLine.textContent = `$${shippingCost.toFixed(2)}`;
+    totalLine.textContent = `$${(subtotal + shippingCost).toFixed(2)}`;
+  };
+
+  updateOrderSummary();
+  summaryDiv.appendChild(orderSummaryCard);
+  checkoutContainer.appendChild(summaryDiv);
+
+  const validateForm = () => {
+    const allAddressFieldsFilled = addressFields.every((field) => {
+      const input2 = document.getElementById(field.id);
+      return input2.value.trim() !== "";
+    });
+
+    const paymentSelected = Array.from(
+      document.querySelectorAll('input[name="payment"]')
+    ).some((radio) => radio.checked);
+
+    modalButton.disabled = !(allAddressFieldsFilled && paymentSelected);
+  };
+
+  addressFields.forEach((field) => {
+    const input2 = document.getElementById(field.id);
+    input2.addEventListener("input", validateForm);
+  });
+
+  const paymentRadios = document.querySelectorAll('input[name="payment"]');
+  paymentRadios.forEach((radio) => {
+    radio.addEventListener("change", validateForm);
+  });
 }
+
+// const modal = document.createElement("div");
+// modal.className = "modal hidden";
+
+// const modalContent = document.createElement("div");
+// modalContent.className = "modal-content";
+// modalContent.textContent =
+//   "Thank you for shopping with us!\r\n Your order will be processed and delivered shortly. We at Kenvorisa appreciate your business.";
+
+// const closeButton = document.createElement("button");
+// closeButton.textContent = "Continue shopping";
+// closeButton.className = "close-button";
+
+// modalContent.appendChild(closeButton);
+// modal.appendChild(modalContent);
+// checkoutContainer.appendChild(modal);
+
+// modalButton.addEventListener("click", () => {
+//   modal.classList.remove("hidden");
+//   document.body.classList.add("blur-background");
+// });
+
+// closeButton.addEventListener("click", () => {
+//   renderShop();
+//   modal.classList.remove("hidden");
+//   document.body.classList.remove("blur-background");
+// });

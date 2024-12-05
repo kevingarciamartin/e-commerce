@@ -1,38 +1,74 @@
 import "./products.css";
 import { filterCategory } from "../../utils/filter";
+import { sortByTitle, sortByPrice, reverseArray } from "../../utils/sort";
+import { addToCartFunction } from "../../utils/helpers";
 
-export function renderProducts(category = "all", limit = null) {
-  const products = getProducts(category);
+let currentCategory = "all";
+
+export function renderProducts(
+  category = currentCategory,
+  sortBy = "default",
+  reverseOrder = false,
+  limit = null
+) {
+  currentCategory = category;
+  localStorage.setItem('currentShopCategory', category);
+  
+  let products = getProducts(category);
+
+  switch (sortBy) {
+    case "title":
+      products = sortByTitle(products);
+      break;
+    case "price":
+      products = sortByPrice(products);
+      break;
+    default:
+      break;
+  }
+
+  if (reverseOrder === true) products = reverseArray(products);
 
   // Limit the number of products if a limit is specified
   const limitedProducts = limit ? products.slice(0, limit) : products;
 
   const contentContainer = document.querySelector("main .content-container");
-  const productsContainer = document.createElement("section");
   contentContainer.classList.add("content-container");
-  productsContainer.classList.add("products-container");
 
-  productsContainer.innerHTML = "";
+  let productsContainer = document.querySelector(
+    ".content-container .products-container"
+  );
+  if (productsContainer === null) {
+    productsContainer = document.createElement("section");
+    productsContainer.classList.add("products-container");
+  } else {
+    productsContainer.innerHTML = "";
+  }
 
   limitedProducts.forEach((product) => {
     const productElement = document.createElement("div");
     productElement.classList.add("product");
 
     productElement.innerHTML = `
-            <img src="${product.image}" alt="${product.title}" class="product-image"/>
-            <div class="title-price">
-                <h3 class="product-title">${product.title}</h3>
-                <p class="product-price">$${product.price}</p>
-            </div>
-            <p class="product-description hidden">${product.description}</p>
-            <div class="svg-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-info">
-                    <title>information-outline</title>
-                    <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
-                </svg>
-                <button class="Add-to-cart-button">Add to cart</button>
-            </div>
-       `;
+      <img src="${product.image}" alt="${product.title}" class="product-image"/>
+      <div class="title-price">
+        <h3 class="product-title">${product.title}</h3>
+        <p class="product-price">$${product.price}</p>
+      </div>
+      <p class="product-description hidden">${product.description}</p>
+      <div class="svg-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-info">
+          <title>information-outline</title>
+          <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
+        </svg>
+        <button class="Add-to-cart-button">Add to cart</button>
+      </div>
+    `;
+
+    // Add the event listener after setting innerHTML
+    productElement
+      .querySelector(".Add-to-cart-button")
+      .addEventListener("click", () => addToCartFunction(product));
 
     // Add event listener for toggling description
     const svgInfo = productElement.querySelector(".svg-info");
@@ -61,7 +97,7 @@ export function renderProducts(category = "all", limit = null) {
   contentContainer.appendChild(productsContainer);
 }
 
-function getProducts(category) {
+export function getProducts(category = "all") {
   try {
     let products = localStorage.getItem("products");
     products = JSON.parse(products);

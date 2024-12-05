@@ -1,0 +1,33 @@
+.home-products-title {
+  font-size: var(--fs-heading);
+  font-family: var(--ff-poppins);
+  font-weight: 400;
+  text-align: center;
+  margin: 30px 0px;
+}
+.home-products-button {
+  font-size: var(--fs-btn-large);
+  font-family: var(--ff-inter);
+  font-weight: 600;
+  color: var(--clr-neutral-100);
+  background-color: var(--clr-green);
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  display: block;
+  padding: 1rem 2rem;
+  margin: 40px auto 20px;
+}
+.homeproduct {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 3rem;
+}
+@media (max-width: 480px) {
+  .homeproduct {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 1rem;
+    justify-content: center;
+  }
+}

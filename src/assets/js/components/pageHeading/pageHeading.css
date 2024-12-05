@@ -72,9 +72,14 @@
       }
     }
 
-    .page_heading__button-container {
+    .page-heading__button-container {
       display: flex;
       gap: 1rem;
+
+      .active {
+        background-color: var(--clr-accent);
+        color: var(--clr-neutral-100);
+      }
     }
   }
 }

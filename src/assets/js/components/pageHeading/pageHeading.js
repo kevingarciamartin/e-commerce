@@ -65,17 +65,23 @@ function createFilterAndSortToolbar() {
   buttonContainer.classList.add("page-heading__button-container");
 
   const sortByTitleButton = document.createElement("button");
+  sortByTitleButton.id = "page-heading__toolbar-sort-by-title";
   sortByTitleButton.classList.add("page-heading__toolbar-button");
+  sortByTitleButton.setAttribute("data-sort", "title");
   sortByTitleButton.textContent = "A-Z";
   buttonContainer.appendChild(sortByTitleButton);
 
   const sortByPriceButton = document.createElement("button");
+  sortByPriceButton.id = "page-heading__toolbar-sort-by-price";
   sortByPriceButton.classList.add("page-heading__toolbar-button");
+  sortByPriceButton.setAttribute("data-sort", "price");
   sortByPriceButton.textContent = "Price";
   buttonContainer.appendChild(sortByPriceButton);
 
   const reverseOrderButton = document.createElement("button");
+  reverseOrderButton.id = "page-heading__toolbar-reverse-order";
   reverseOrderButton.classList.add("page-heading__toolbar-button");
+  reverseOrderButton.setAttribute("data-sort", "reverse");
   reverseOrderButton.textContent = "Reverse"; //TODO: Change to svg
   buttonContainer.appendChild(reverseOrderButton);
 

@@ -1,4 +1,5 @@
 import "./pageHeading.css";
+import { capitalize } from "../../utils/helpers";
 
 export function renderPageHeading(title, showToolbar = false) {
   const contentContainer = document.querySelector("main .content-container");
@@ -25,6 +26,8 @@ function createFilterAndSortToolbar() {
   const filterLabel = document.createElement("label");
   const categoryFilter = document.createElement("div");
   const categoryDatalist = document.createElement("div");
+  const storedCategory = localStorage.getItem("currentShopCategory") || "all";
+  const displayCategory = capitalize(storedCategory);
   const categories = [
     "All",
     "Electronics",
@@ -42,7 +45,7 @@ function createFilterAndSortToolbar() {
 
   filterLabel.textContent = "Filter by category:";
   categoryFilter.innerHTML = `
-    <span id="page-heading__toolbar-current-category">${categories[0]}</span>
+    <span id="page-heading__toolbar-current-category">${displayCategory}</span>
     <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path opacity="0.5" d="M11.5 4.5835V17.4168M11.5 17.4168L18.2084 11.0002M11.5 17.4168L4.79169 11.0002" stroke="#6D6D6D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>

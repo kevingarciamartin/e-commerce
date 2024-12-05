@@ -9,12 +9,12 @@
   border: 1px solid #ddd;
   padding: 1rem;
   border-radius: 24px;
-  width: 263px;
+  /* max-width: 263px; */
 }
 .svg-info {
   fill: var(--clr-green);
-  width: 35px;
-  height: 35px;
+  width: 3.5vw;
+  height: 3.5vw;
   cursor: pointer;
 }
 .Add-to-cart-button {
@@ -23,10 +23,10 @@
   font-family: var(--ff-inter);
   border: none;
   border-radius: 20px;
-  font-size: var(--fs-100);
+  font-size: 1.6vw;
   font-weight: 600;
-  width: 124px;
-  height: 27px;
+  width: 12.4vw;
+  height: 2.7vw;
 }
 .svg-button {
   display: flex;
@@ -37,7 +37,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-size: var(--fs-200);
+  font-size: 2vw;
   font-family: var(--ff-inter);
   font-weight: 600;
 }
@@ -47,15 +47,16 @@
 }
 .product h3 {
   width: 100%;
-  white-space: normal;
+  white-space: nowrap;
   font-family: var(--ff-inter);
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: clip;
   display: block;
   line-height: 1.5em;
   max-height: 3em;
-  font-size: var(--fs-200);
+  font-size: 2vw;
   margin-bottom: 0px;
+  word-wrap: break-word;
 }
 .product img {
   width: 100%;
@@ -68,7 +69,7 @@
 }
 
 .product-description {
-  font-size: var(--fs-100);
+  font-size: 1.6vw;
   font-weight: 400;
   font-family: var(--ff-poppins);
   color: var(--clr-neutral-900);

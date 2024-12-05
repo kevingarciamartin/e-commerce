@@ -166,12 +166,13 @@ footer {
     grid-template-columns: subgrid;
     align-items: center;
 
-    padding-block: 2rem;
+    padding-block: 1.75rem 2rem;
     border-top: 1px solid var(--clr-border);
 
     .logo-btn {
       grid-column: span 2;
       justify-self: start;
+      padding-block: 0.25rem 0;
     }
 
     #license {

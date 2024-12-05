@@ -1,14 +1,24 @@
 import "./checkout.css";
-import { resetMain } from "../../utils/helpers.js";
+import "../../components/orderSummary/orderSummary.css";
+import { resetMain, loadCartFromStorage } from "../../utils/helpers.js";
+import {
+  calculateTotal,
+  createOrderSummaryCard,
+} from "../../components/orderSummary/orderSummary.js";
+import { renderPageHeading } from "../../components/pageHeading/pageHeading.js";
 
-export function renderCheckout() {
+export function renderCheckout(cart = []) {
   resetMain();
+
+  renderPageHeading("Checkout");
+
+  if (!cart || cart.length === 0) {
+    cart = loadCartFromStorage();
+  }
+
   const main = document.querySelector("main .content-container");
   const checkoutContainer = document.createElement("section");
-
-  const checkout = document.createElement("h1");
-  checkout.textContent = "Checkout";
-  checkoutContainer.appendChild(checkout);
+  main.appendChild(checkoutContainer);
 
   // First section
   const delivery = document.createElement("h2");
@@ -85,5 +95,92 @@ export function renderCheckout() {
   purchase.textContent = "3. Complete purchase";
   checkoutContainer.appendChild(purchase);
 
-  main.appendChild(checkoutContainer);
+  const summaryDiv = document.createElement("div");
+  summaryDiv.classList.add("summary-card");
+
+  const modalButton = document.createElement("button");
+  modalButton.textContent = "Pay now";
+  modalButton.type = "button";
+  modalButton.className = "modal-button";
+  modalButton.disabled = true;
+
+  function handlePayNow() {
+    alert("Thank you for shopping with us!");
+  }
+  modalButton.addEventListener("click", handlePayNow);
+
+  const shippingCost = 9.99;
+  const orderSummaryCard = createOrderSummaryCard(
+    cart,
+    "Pay now",
+    handlePayNow,
+    modalButton
+  );
+
+  const shippingLine = orderSummaryCard.querySelector(
+    ".summary-line:nth-child(3) span:last-child"
+  );
+  const totalLine = orderSummaryCard.querySelector(
+    ".summary-line.total span:last-child"
+  );
+
+  const updateOrderSummary = () => {
+    const subtotal = calculateTotal(cart);
+    shippingLine.textContent = `$${shippingCost.toFixed(2)}`;
+    totalLine.textContent = `$${(subtotal + shippingCost).toFixed(2)}`;
+  };
+
+  updateOrderSummary();
+  summaryDiv.appendChild(orderSummaryCard);
+  checkoutContainer.appendChild(summaryDiv);
+
+  const validateForm = () => {
+    const allAddressFieldsFilled = addressFields.every((field) => {
+      const input2 = document.getElementById(field.id);
+      return input2.value.trim() !== "";
+    });
+
+    const paymentSelected = Array.from(
+      document.querySelectorAll('input[name="payment"]')
+    ).some((radio) => radio.checked);
+
+    modalButton.disabled = !(allAddressFieldsFilled && paymentSelected);
+  };
+
+  addressFields.forEach((field) => {
+    const input2 = document.getElementById(field.id);
+    input2.addEventListener("input", validateForm);
+  });
+
+  const paymentRadios = document.querySelectorAll('input[name="payment"]');
+  paymentRadios.forEach((radio) => {
+    radio.addEventListener("change", validateForm);
+  });
 }
+
+// const modal = document.createElement("div");
+// modal.className = "modal hidden";
+
+// const modalContent = document.createElement("div");
+// modalContent.className = "modal-content";
+// modalContent.textContent =
+//   "Thank you for shopping with us!\r\n Your order will be processed and delivered shortly. We at Kenvorisa appreciate your business.";
+
+// const closeButton = document.createElement("button");
+// closeButton.textContent = "Continue shopping";
+// closeButton.className = "close-button";
+
+// modalContent.appendChild(closeButton);
+// modal.appendChild(modalContent);
+// checkoutContainer.appendChild(modal);
+
+// modalButton.addEventListener("click", () => {
+//   modal.classList.remove("hidden");
+//   document.body.classList.add("blur-background");
+// });
+
+// closeButton.addEventListener("click", () => {
+//   renderShop();
+//   modal.classList.remove("hidden");
+//   document.body.classList.remove("blur-background");
+// });

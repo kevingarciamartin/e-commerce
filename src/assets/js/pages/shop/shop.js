@@ -67,7 +67,11 @@ function handleEventlisteners() {
   // Handle sorting logic
   sortButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
-      const sortType = e.target.getAttribute("data-sort");
+      button = e.target.closest(".page-heading__toolbar-button");
+      
+      const sortType = e.target
+        .closest(".page-heading__toolbar-button")
+        .getAttribute("data-sort");
       const currentCategory = document.querySelector(
         "#page-heading__toolbar-current-category"
       ).toLowerCase;
@@ -75,7 +79,7 @@ function handleEventlisteners() {
       if (sortType === "reverse") {
         // Toggle reverse order
         isReversed = !isReversed;
-        e.target.classList.toggle("active");
+        button.classList.toggle("active");
       } else {
         // Handle title and price sorting
         if (currentSortBy === sortType) {
@@ -90,7 +94,7 @@ function handleEventlisteners() {
               btn.classList.remove("active");
             }
           });
-          e.target.classList.add("active");
+          button.classList.add("active");
         }
       }
 

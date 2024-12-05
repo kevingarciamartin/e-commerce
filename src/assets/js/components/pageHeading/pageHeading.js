@@ -23,12 +23,12 @@ function createFilterAndSortToolbar() {
   const toolbarContainer = document.createElement("div");
   const filterContainer = document.createElement("fieldset");
   const filterLabel = document.createElement("label");
-  const categoryFilter = document.createElement("input");
-  const categoryDatalist = document.createElement("datalist");
+  const categoryFilter = document.createElement("div");
+  const categoryDatalist = document.createElement("div");
   const categories = [
     "All",
     "Electronics",
-    "Jewelry",
+    "Jewelery",
     "Men's clothing",
     "Women's clothing",
   ];
@@ -36,16 +36,22 @@ function createFilterAndSortToolbar() {
   toolbarContainer.classList.add("page-heading__toolbar-container");
   categoryFilter.id = "page-heading__toolbar-category-filter";
   categoryDatalist.id = "page-heading__toolbar-categories";
+  categoryDatalist.classList.add("hidden");
 
   filterLabel.setAttribute("for", "page-heading__toolbar-category-filter");
-  categoryFilter.setAttribute("list", "page-heading__toolbar-categories");
-  categoryFilter.setAttribute("placeholder", categories[0]);
 
   filterLabel.textContent = "Filter by category:";
+  categoryFilter.innerHTML = `
+    <span id="page-heading__toolbar-current-category">${categories[0]}</span>
+    <svg id="page-heading__toolbar-filter-arrow" width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path opacity="0.5" d="M11.5 4.5835V17.4168M11.5 17.4168L18.2084 11.0002M11.5 17.4168L4.79169 11.0002" stroke="#6D6D6D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `;
 
   categories.forEach((category) => {
-    const option = document.createElement("option");
-    option.value = category;
+    const option = document.createElement("button");
+    option.classList.add("page-heading__toolbar-category-option");
+    option.textContent = category;
     categoryDatalist.appendChild(option);
   });
 
@@ -56,20 +62,26 @@ function createFilterAndSortToolbar() {
 
   // Buttons
   const buttonContainer = document.createElement("div");
-  buttonContainer.classList.add("page_heading__button-container");
+  buttonContainer.classList.add("page-heading__button-container");
 
   const sortByTitleButton = document.createElement("button");
+  sortByTitleButton.id = "page-heading__toolbar-sort-by-title";
   sortByTitleButton.classList.add("page-heading__toolbar-button");
+  sortByTitleButton.setAttribute("data-sort", "title");
   sortByTitleButton.textContent = "A-Z";
   buttonContainer.appendChild(sortByTitleButton);
 
   const sortByPriceButton = document.createElement("button");
+  sortByPriceButton.id = "page-heading__toolbar-sort-by-price";
   sortByPriceButton.classList.add("page-heading__toolbar-button");
+  sortByPriceButton.setAttribute("data-sort", "price");
   sortByPriceButton.textContent = "Price";
   buttonContainer.appendChild(sortByPriceButton);
 
   const reverseOrderButton = document.createElement("button");
+  reverseOrderButton.id = "page-heading__toolbar-reverse-order";
   reverseOrderButton.classList.add("page-heading__toolbar-button");
+  reverseOrderButton.setAttribute("data-sort", "reverse");
   reverseOrderButton.textContent = "Reverse"; //TODO: Change to svg
   buttonContainer.appendChild(reverseOrderButton);
 

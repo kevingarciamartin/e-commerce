@@ -1,0 +1,90 @@
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 44px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  padding-top: 20px;
+}
+
+/* First section */
+.address-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  align-items: start;
+  width: 1100px;
+}
+
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 473px;
+}
+
+.field-wrapper label {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.field-wrapper input {
+  width: 473px;
+  height: 47px;
+  font-size: 18px;
+  padding: 20px;
+  border: 1px solid var(--clr-neutral-300);
+  border-radius: 25px;
+  background-color: var(--clr-neutral-200);
+}
+
+.field-wrapper input:focus {
+  outline: 2px solid var(--clr-green);
+}
+
+/* Second section */
+.payment-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  width: 1100px;
+}
+
+.radio-wrapper {
+  text-align: center;
+}
+
+.payment-section input[type="radio"] {
+  display: none;
+}
+
+.payment-section label {
+  display: block;
+  width: 473px;
+  height: 47px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 25px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-section label:hover {
+  background-color: var(--clr-neutral-200);
+}
+
+.payment-section input[type="radio"]:checked + label {
+  background-color: var(--clr-green);
+  color: #fff;
+  border-color: var(--clr-green);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transform: translateY(2px);
+}

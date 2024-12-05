@@ -10,6 +10,7 @@
   h1 {
     font-family: var(--ff-heading);
     font-size: var(--fs-heading);
+    font-weight: var(--fw-heading);
     margin: 0;
   }
 
@@ -22,15 +23,67 @@
 
     fieldset {
       display: flex;
+      align-items: center;
       gap: 1rem;
+      
+      position: relative;
 
       border: none;
       padding: 0;
+
+      label {
+        flex-shrink: 0;
+      }
     }
 
-    .page_heading__button-container {
+    #page-heading__toolbar-category-filter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border: 1px solid var(--clr-border);
+      border-radius: 99rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      padding: 0.5rem 1rem;
+      width: 15rem;
+    }
+
+    #page-heading__toolbar-categories {
+      display: grid;
+
+      position: absolute;
+      top: calc(100% + 0.25rem);
+      left: calc(50%);
+      z-index: 1;
+
+      background-color: var(--clr-background);
+      border: 1px solid var(--clr-border);
+      border-radius: 1rem;
+
+      .page-heading__toolbar-category-option {
+        background: none;
+        border: none;
+        padding: 1rem;
+
+        &:hover {
+          background-color: var(--clr-card);
+        }
+      }
+    }
+
+    .page-heading__button-container {
       display: flex;
       gap: 1rem;
+
+      .active {
+        background-color: var(--clr-accent);
+        color: var(--clr-neutral-100);
+      }
     }
   }
+}
+
+.hidden {
+  display: none !important; 
 }

@@ -13,8 +13,8 @@
 }
 .svg-info {
   fill: var(--clr-green);
-  width: 3.5vw;
-  height: 3.5vw;
+  width: 2.43vw;
+  height: 2.43vw;
   cursor: pointer;
 }
 .Add-to-cart-button {
@@ -23,10 +23,10 @@
   font-family: var(--ff-inter);
   border: none;
   border-radius: 20px;
-  font-size: 1.6vw;
+  font-size: 1.11vw;
   font-weight: 600;
-  width: 12.4vw;
-  height: 2.7vw;
+  width: 8.61vw;
+  height: 1.88vw;
 }
 .svg-button {
   display: flex;
@@ -37,7 +37,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-size: 2vw;
+  font-size: 1.39vw;
   font-family: var(--ff-inter);
   font-weight: 600;
 }
@@ -54,7 +54,7 @@
   display: block;
   line-height: 1.5em;
   max-height: 3em;
-  font-size: 2vw;
+  font-size: 1.39vw;
   margin-bottom: 0px;
   word-wrap: break-word;
 }
@@ -69,7 +69,7 @@
 }
 
 .product-description {
-  font-size: 1.6vw;
+  font-size: 1.39vw;
   font-weight: 400;
   font-family: var(--ff-poppins);
   color: var(--clr-neutral-900);

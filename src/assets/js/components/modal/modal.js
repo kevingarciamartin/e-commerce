@@ -1,98 +1,84 @@
-// Add CSS dynamically
-const link = document.createElement("link");
-link.rel = "stylesheet";
-link.href = "model.css";
-document.head.appendChild(link);
-
-// Add Header
+// Create and inject the search bar dynamically
 const header = document.createElement("header");
-header.innerHTML = `
-  <div class="logo">Kenvorisa</div>
-  <nav>
-    <a href="#">Shop</a>
-    <a href="#">Profile</a>
-    <button class="cart-button">Cart</button>
-  </nav>
+header.classList.add("search-bar-container");
+
+// Search Bar Structure
+const searchBar = document.createElement("div");
+searchBar.classList.add("search-bar");
+
+const searchInput = document.createElement("input");
+searchInput.type = "text";
+searchInput.id = "search-bar";
+searchInput.placeholder = "Search";
+searchInput.setAttribute("aria-label", "Search");
+
+const searchButton = document.createElement("button");
+searchButton.id = "search-btn";
+
+// Search Icon (SVG)
+searchButton.innerHTML = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85a1.007 1.007 0 0 0-.115-.098zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+  </svg>
 `;
-document.body.appendChild(header);
 
-// Add Main Content
-const main = document.createElement("main");
-main.innerHTML = `
-  <h1>Checkout</h1>
-  <section>
-    <h2>1. Delivery Address</h2>
-    <form id="checkout-form">
-      <label for="full-name">Full Name:</label>
-      <input type="text" id="full-name" placeholder="John Doe" required />
+// Append elements to the search bar
+searchBar.appendChild(searchInput);
+searchBar.appendChild(searchButton);
 
-      <label for="email">Email Address:</label>
-      <input type="email" id="email" placeholder="john@example.com" required />
+// Append search bar to header
+header.appendChild(searchBar);
 
-      <label for="address">Address:</label>
-      <input type="text" id="address" placeholder="123 Main Street" required />
+// Append header to the body
+document.body.prepend(header);
 
-      <label for="city">City:</label>
-      <input type="text" id="city" placeholder="New York" required />
+// Search Functionality
+const API_URL = "https://jsonplaceholder.typicode.com/posts";
 
-      <div class="row">
-        <div>
-          <label for="zip">ZIP Code:</label>
-          <input type="text" id="zip" placeholder="10001" required />
-        </div>
-        <div>
-          <label for="country">Country:</label>
-          <input type="text" id="country" placeholder="USA" required />
-        </div>
-      </div>
-    </form>
-  </section>
+searchButton.addEventListener("click", async () => {
+  const query = searchInput.value.trim();
 
-  <section>
-    <h2>2. Select Payment Method</h2>
-    <button class="payment-method">Credit Card</button>
-    <button class="payment-method">PayPal</button>
-  </section>
+  if (!query) {
+    alert("Please enter a search term.");
+    return;
+  }
 
-  <section>
-    <h2>3. Complete Purchase</h2>
-    <div class="order-summary">
-      <p>Subtotal: <span>$100</span></p>
-      <p>Shipping: <span>$5</span></p>
-      <p>Total: <span>$105</span></p>
-    </div>
-    <button id="complete-order">Complete Order</button>
-  </section>
-`;
-document.body.appendChild(main);
+  try {
+    const response = await fetch(API_URL); // No `q` parameter in jsonplaceholder
+    const data = await response.json();
 
-// Add Confirmation Modal
-const modal = document.createElement("div");
-modal.id = "confirmation-modal";
-modal.classList.add("hidden");
-modal.innerHTML = `
-  <div class="modal-content">
-    <h2>Thank you for shopping with us!</h2>
-    <p>Your order will be processed and delivered shortly. We at Kenvorisa appreciate your business.</p>
-    <button id="continue-shopping">Continue Shopping</button>
-  </div>
-`;
-document.body.appendChild(modal);
+    // Filter results based on query (for demo purposes)
+    const filteredResults = data.filter((item) =>
+      item.title.toLowerCase().includes(query.toLowerCase())
+    );
 
-// Add Footer
-const footer = document.createElement("footer");
-footer.innerHTML = `<p>© 2024 Kenvorisa AB. All rights reserved.</p>`;
-document.body.appendChild(footer);
-
-// Handle Modal Behavior
-const completeOrderButton = document.getElementById("complete-order");
-const confirmationModal = document.getElementById("confirmation-modal");
-const continueShoppingButton = document.getElementById("continue-shopping");
-
-completeOrderButton.addEventListener("click", () => {
-  confirmationModal.classList.remove("hidden");
+    displayResults(filteredResults);
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+    alert("An error occurred while searching. Please try again.");
+  }
 });
 
-continueShoppingButton.addEventListener("click", () => {
-  confirmationModal.classList.add("hidden");
+function displayResults(results) {
+  const resultsContainer = document.getElementById("results-container");
+  resultsContainer.innerHTML = ""; // Clear old results
+
+  if (results.length === 0) {
+    resultsContainer.innerHTML = "<p>No results found.</p>";
+    return;
+  }
+
+  results.forEach((result) => {
+    const resultItem = document.createElement("div");
+    resultItem.className = "result-item";
+    resultItem.textContent = result.title;
+    resultsContainer.appendChild(resultItem);
+  });
+}
+
+// Trigger search on "Enter" key press
+searchInput.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    searchButton.click();
+  }
 });

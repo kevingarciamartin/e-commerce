@@ -3,12 +3,15 @@ import { filterCategory } from "../../utils/filter";
 import { sortByTitle, sortByPrice, reverseArray } from "../../utils/sort";
 import { addToCartFunction } from "../../utils/helpers";
 
+let currentCategory = "all";
+
 export function renderProducts(
-  category = "all",
+  category = currentCategory,
   sortBy = "default",
   reverseOrder = false,
   limit = null
 ) {
+  currentCategory = category;
   let products = getProducts(category);
 
   switch (sortBy) {

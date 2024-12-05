@@ -24,7 +24,6 @@ function createFilterAndSortToolbar() {
   const filterContainer = document.createElement("fieldset");
   const filterLabel = document.createElement("label");
   const categoryFilter = document.createElement("div");
-  const categoryCurrent = document.createElement("span");
   const categoryDatalist = document.createElement("div");
   const categories = [
     "All",
@@ -36,7 +35,6 @@ function createFilterAndSortToolbar() {
 
   toolbarContainer.classList.add("page-heading__toolbar-container");
   categoryFilter.id = "page-heading__toolbar-category-filter";
-  categoryCurrent.id = "page-heading__toolbar-current-category";
   categoryDatalist.id = "page-heading__toolbar-categories";
   categoryDatalist.classList.add("hidden");
 
@@ -67,17 +65,23 @@ function createFilterAndSortToolbar() {
   buttonContainer.classList.add("page-heading__button-container");
 
   const sortByTitleButton = document.createElement("button");
+  sortByTitleButton.id = "page-heading__toolbar-sort-by-title";
   sortByTitleButton.classList.add("page-heading__toolbar-button");
+  sortByTitleButton.setAttribute("data-sort", "title");
   sortByTitleButton.textContent = "A-Z";
   buttonContainer.appendChild(sortByTitleButton);
 
   const sortByPriceButton = document.createElement("button");
+  sortByPriceButton.id = "page-heading__toolbar-sort-by-price";
   sortByPriceButton.classList.add("page-heading__toolbar-button");
+  sortByPriceButton.setAttribute("data-sort", "price");
   sortByPriceButton.textContent = "Price";
   buttonContainer.appendChild(sortByPriceButton);
 
   const reverseOrderButton = document.createElement("button");
+  reverseOrderButton.id = "page-heading__toolbar-reverse-order";
   reverseOrderButton.classList.add("page-heading__toolbar-button");
+  reverseOrderButton.setAttribute("data-sort", "reverse");
   reverseOrderButton.textContent = "Reverse"; //TODO: Change to svg
   buttonContainer.appendChild(reverseOrderButton);
 

@@ -1,9 +1,31 @@
 import "./products.css";
 import { filterCategory } from "../../utils/filter";
-import {addToCartFunction} from "../../utils/helpers"
+import { sortByTitle, sortByPrice, reverseArray } from "../../utils/sort";
+import { addToCartFunction } from "../../utils/helpers";
 
-export function renderProducts(category = "all", limit = null) {
-  const products = getProducts(category);
+let currentCategory = "all";
+
+export function renderProducts(
+  category = currentCategory,
+  sortBy = "default",
+  reverseOrder = false,
+  limit = null
+) {
+  currentCategory = category;
+  let products = getProducts(category);
+
+  switch (sortBy) {
+    case "title":
+      products = sortByTitle(products);
+      break;
+    case "price":
+      products = sortByPrice(products);
+      break;
+    default:
+      break;
+  }
+
+  if (reverseOrder === true) products = reverseArray(products);
 
   // Limit the number of products if a limit is specified
   const limitedProducts = limit ? products.slice(0, limit) : products;
@@ -11,7 +33,9 @@ export function renderProducts(category = "all", limit = null) {
   const contentContainer = document.querySelector("main .content-container");
   contentContainer.classList.add("content-container");
 
-  let productsContainer = document.querySelector(".content-container .products-container");
+  let productsContainer = document.querySelector(
+    ".content-container .products-container"
+  );
   if (productsContainer === null) {
     productsContainer = document.createElement("section");
     productsContainer.classList.add("products-container");
@@ -40,7 +64,9 @@ export function renderProducts(category = "all", limit = null) {
     `;
 
     // Add the event listener after setting innerHTML
-    productElement.querySelector('.Add-to-cart-button').addEventListener('click', () => addToCartFunction(product));
+    productElement
+      .querySelector(".Add-to-cart-button")
+      .addEventListener("click", () => addToCartFunction(product));
 
     // Add event listener for toggling description
     const svgInfo = productElement.querySelector(".svg-info");
@@ -69,7 +95,7 @@ export function renderProducts(category = "all", limit = null) {
   contentContainer.appendChild(productsContainer);
 }
 
-function getProducts(category = "all") {
+export function getProducts(category = "all") {
   try {
     let products = localStorage.getItem("products");
     products = JSON.parse(products);

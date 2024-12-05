@@ -44,9 +44,15 @@ searchButton.addEventListener("click", async () => {
   }
 
   try {
-    const response = await fetch(`${API_URL}?q=${encodeURIComponent(query)}`);
+    const response = await fetch(API_URL); // No `q` parameter in jsonplaceholder
     const data = await response.json();
-    displayResults(data);
+
+    // Filter results based on query (for demo purposes)
+    const filteredResults = data.filter((item) =>
+      item.title.toLowerCase().includes(query.toLowerCase())
+    );
+
+    displayResults(filteredResults);
   } catch (error) {
     console.error("Error fetching search results:", error);
     alert("An error occurred while searching. Please try again.");

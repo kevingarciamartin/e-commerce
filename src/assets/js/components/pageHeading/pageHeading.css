@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
 
   border-bottom: 1px solid var(--clr-border);
   margin-block: 2rem;
@@ -19,6 +21,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
+    flex-wrap: wrap;
 
     font-size: var(--fs-btn-small);
 
@@ -137,4 +140,10 @@
 
 .hidden {
   display: none !important;
+}
+
+@media (max-width: 765px) {
+  .page-heading__toolbar-container {
+   gap: 0.5rem !important;
+  }
 }

@@ -5,9 +5,12 @@ import {
   calculateTotal,
   createOrderSummaryCard,
 } from "../../components/orderSummary/orderSummary.js";
+import { renderPageHeading } from "../../components/pageHeading/pageHeading.js";
 
 export function renderCheckout(cart = []) {
   resetMain();
+
+  renderPageHeading("Checkout");
 
   if (!cart || cart.length === 0) {
     cart = loadCartFromStorage();
@@ -16,10 +19,6 @@ export function renderCheckout(cart = []) {
   const main = document.querySelector("main .content-container");
   const checkoutContainer = document.createElement("section");
   main.appendChild(checkoutContainer);
-
-  const checkout = document.createElement("h1");
-  checkout.textContent = "Checkout";
-  checkoutContainer.appendChild(checkout);
 
   // First section
   const delivery = document.createElement("h2");

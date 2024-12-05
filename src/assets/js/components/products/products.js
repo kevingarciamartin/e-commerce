@@ -11,17 +11,15 @@ export function renderProducts(
 ) {
   let products = getProducts(category);
 
-  if (sortBy !== "default") {
-    switch (sortBy) {
-      case "title":
-        products = sortByTitle(products);
-        break;
-      case "price":
-        products = sortByPrice(products);
-        break;
-      default:
-        break;
-    }
+  switch (sortBy) {
+    case "title":
+      products = sortByTitle(products);
+      break;
+    case "price":
+      products = sortByPrice(products);
+      break;
+    default:
+      break;
   }
 
   if (reverseOrder === true) products = reverseArray(products);

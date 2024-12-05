@@ -43,7 +43,7 @@ function createFilterAndSortToolbar() {
   filterLabel.textContent = "Filter by category:";
   categoryFilter.innerHTML = `
     <span id="page-heading__toolbar-current-category">${categories[0]}</span>
-    <svg id="page-heading__toolbar-filter-arrow" width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path opacity="0.5" d="M11.5 4.5835V17.4168M11.5 17.4168L18.2084 11.0002M11.5 17.4168L4.79169 11.0002" stroke="#6D6D6D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   `;
@@ -82,7 +82,14 @@ function createFilterAndSortToolbar() {
   reverseOrderButton.id = "page-heading__toolbar-reverse-order";
   reverseOrderButton.classList.add("page-heading__toolbar-button");
   reverseOrderButton.setAttribute("data-sort", "reverse");
-  reverseOrderButton.textContent = "Reverse"; //TODO: Change to svg
+  reverseOrderButton.innerHTML = `
+    <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11.5 4.5835V17.4168M11.5 17.4168L18.2084 11.0002M11.5 17.4168L4.79169 11.0002" stroke="#6D6D6D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11.5 4.5835V17.4168M11.5 17.4168L18.2084 11.0002M11.5 17.4168L4.79169 11.0002" stroke="#6D6D6D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `;
   buttonContainer.appendChild(reverseOrderButton);
 
   toolbarContainer.appendChild(buttonContainer);

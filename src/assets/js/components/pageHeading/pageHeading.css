@@ -18,14 +18,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 2rem;
 
-    width: 50vw;
+    font-size: var(--fs-btn-small);
+
+    svg {
+      height: var(--fs-200);
+    }
 
     fieldset {
       display: flex;
       align-items: center;
       gap: 1rem;
-      
+
       position: relative;
 
       border: none;
@@ -36,16 +41,19 @@
       }
     }
 
+    #page-heading__toolbar-category-filter,
+    .page-heading__button-container button {
+      border: 1px solid var(--clr-border);
+      border-radius: 99rem;
+      padding: 0.5rem 1rem;
+    }
+
     #page-heading__toolbar-category-filter {
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      border: 1px solid var(--clr-border);
-      border-radius: 99rem;
       cursor: pointer;
-      flex-shrink: 0;
-      padding: 0.5rem 1rem;
       width: 15rem;
     }
 
@@ -74,16 +82,59 @@
 
     .page-heading__button-container {
       display: flex;
+      align-items: center;
       gap: 1rem;
 
-      .active {
+      button {
+        background-color: var(--clr-background);
+        border: 1px solid var(--clr-border);
+        color: var(--clr-text);
+        font-size: inherit;
+        height: 100%;
+        transition: background-color 200ms ease;
+      }
+
+      button:has(svg) {
+        display: flex;
+
+        svg path {
+          stroke: var(--clr-default); /* Default color for arrows */
+          transition: all 200ms ease; /* Smooth transition for color changes */
+        }
+
+        svg:first-of-type path {
+          stroke: var(--clr-accent);
+          opacity: 1;
+        }
+
+        svg:last-of-type {
+          transform: rotateZ(0.5turn);
+
+          path {
+            stroke: var(--clr-neutral-400);
+            opacity: 0.5;
+          }
+        }
+      }
+
+      button.active {
         background-color: var(--clr-accent);
         color: var(--clr-neutral-100);
+
+        svg:first-of-type path {
+          stroke: var(--clr-neutral-400);
+          opacity: 0.5;
+        }
+
+        svg:last-of-type path {
+          stroke: var(--clr-neutral-100);
+          opacity: 1;
+        }
       }
     }
   }
 }
 
 .hidden {
-  display: none !important; 
+  display: none !important;
 }

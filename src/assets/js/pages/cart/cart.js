@@ -3,10 +3,9 @@ import {
   resetMain,
   loadCartFromStorage,
   saveCartToStorage,
-
 } from "../../utils/helpers";
 import { renderCheckout } from "../checkout/checkout";
-import {createOrderSummaryCard} from "../../components/orderSummary/orderSummary";
+import { createOrderSummaryCard } from "../../components/orderSummary/orderSummary";
 
 export function renderCart() {
   resetMain();
@@ -23,9 +22,11 @@ class ShoppingCartPage {
   }
 
   renderItemList() {
-    this.itemListContainer.appendChild;
     this.itemListContainer.innerHTML = `
-      <h1 class="page-heading-container">Shopping cart</h1><div class="cart-container"><div class="cart-list"></div></div>
+      <h1 class="page-heading-container">Shopping cart</h1>
+      <div class="cart-container">
+        <div class="cart-list"></div>
+      </div>
     `;
     this.cartList = this.itemListContainer.querySelector(".cart-list");
 
@@ -36,10 +37,23 @@ class ShoppingCartPage {
         : itemElement.classList.remove("item-cart-not-buy");
       this.cartList.appendChild(itemElement);
     });
-    const orderSummaryCard = createOrderSummaryCard(this.cart, 'Continue to payment', renderCheckout);
+
+    const continueToPaymentButton = document.createElement("button");
+    continueToPaymentButton.textContent = "Continue to payment";
+    continueToPaymentButton.type = "button";
+    continueToPaymentButton.className = "continue-to-payment-btn";
+    continueToPaymentButton.addEventListener("click", () => {
+      renderCheckout();
+    });
+
+    const orderSummaryCard = createOrderSummaryCard(
+      this.cart,
+      "Continue to payment",
+      () => renderCheckout(this.cart)
+    );
+
     this.cartContainer =
       this.itemListContainer.querySelector(".cart-container");
-
     this.cartContainer.appendChild(orderSummaryCard);
   }
 
@@ -69,15 +83,16 @@ class ShoppingCartPage {
         )}</p>
       </div>
     `;
-    
-    itemDiv.querySelector('.minus').addEventListener('click', () => {
-      if (item.quantity > 1) { // Prevent quantity from going below 1
+
+    itemDiv.querySelector(".minus").addEventListener("click", () => {
+      if (item.quantity > 1) {
+        // Prevent quantity from going below 1
         this.updateQuantity(item.id, item.quantity - 1);
         this.renderItemList();
       }
     });
-  
-    itemDiv.querySelector('.plus').addEventListener('click', () => {
+
+    itemDiv.querySelector(".plus").addEventListener("click", () => {
       if (item.quantity < 100) {
         this.updateQuantity(item.id, item.quantity + 1);
         this.renderItemList();
@@ -153,4 +168,3 @@ class ShoppingCartPage {
     )}`;
   }
 }
-

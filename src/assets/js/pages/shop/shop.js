@@ -25,6 +25,10 @@ function handleEventlisteners() {
     ".page-heading__toolbar-button"
   );
 
+  let currentSortBy = "default";
+  let isReversed = false;
+
+  // Toggle category dropdown visibility
   document.addEventListener("click", (e) => {
     if (categoryFilter.contains(e.target)) {
       categoryDatalist.classList.toggle("hidden");
@@ -33,22 +37,34 @@ function handleEventlisteners() {
     }
   });
 
+  // Handle category filtering
   categoryOptions.forEach((option) => {
     option.addEventListener("click", (e) => {
       const currentCategory = document.querySelector(
         "#page-heading__toolbar-current-category"
       );
       const selectedCategory = e.target.textContent;
+
+      // Update the current category text
       currentCategory.textContent = selectedCategory;
+
+      // Clear active state for all sorting buttons
+      sortButtons.forEach((btn) => btn.classList.remove("active"));
+
+      // Reset sorting parameters
+      currentSortBy = "default";
+      isReversed = false;
+
+      // Clear and re-render products for the selected category
       productsContainer.innerHTML = "";
       renderProducts(selectedCategory.toLowerCase());
+
+      // Hide the dropdown
       categoryDatalist.classList.add("hidden");
     });
   });
 
-  let currentSortBy = "default";
-  let isReversed = false;
-
+  // Handle sorting logic
   sortButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       const sortType = e.target.getAttribute("data-sort");

@@ -1,5 +1,5 @@
 import "./checkout.css";
-import { rendermodal } from "../../components/modal/modal.js";
+import { renderModal } from "../../components/modal/modal.js";
 import "../../components/orderSummary/orderSummary.css";
 import { resetMain, loadCartFromStorage } from "../../utils/helpers.js";
 import {
@@ -107,7 +107,7 @@ modalButton.className = "modal-button";
 modalButton.disabled = true;
 
 function handlePayNow() {
-  rendermodal(); 
+  renderModal(); 
 } 
 
 modalButton.addEventListener("click", handlePayNow); 

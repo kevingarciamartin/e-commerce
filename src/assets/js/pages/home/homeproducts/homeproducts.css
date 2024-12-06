@@ -1,12 +1,12 @@
 .home-products-title {
-  font-size: 4.03vw;
+  font-size: var(--fs-heading);
   font-family: var(--ff-poppins);
   font-weight: 400;
   text-align: center;
   margin: 30px 0px;
 }
 .home-products-button {
-  font-size: 1.67vw;
+  font-size: var(--fs-btn-large);
   font-family: var(--ff-inter);
   font-weight: 600;
   color: var(--clr-neutral-100);
@@ -19,6 +19,11 @@
   display: block;
   margin: 20px auto;
   margin-top: 50px;
+  border: none;
+  cursor: pointer;
+  display: block;
+  padding: 1rem 2rem;
+  margin: 40px auto 20px;
 }
 .homeproduct {
   display: grid;

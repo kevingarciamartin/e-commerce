@@ -4,9 +4,11 @@ import { renderPageHeading } from "../../components/pageHeading/pageHeading.js";
 import { renderProducts } from "../../components/products/products.js";
 
 export function renderShop() {
+  const storedCategory = localStorage.getItem('currentShopCategory') || 'all';
+  
   resetMain();
   renderPageHeading("Our products", true);
-  renderProducts();
+  renderProducts(storedCategory);
   handleEventlisteners();
 }
 
@@ -47,6 +49,7 @@ function handleEventlisteners() {
 
       // Update the current category text
       currentCategory.textContent = selectedCategory;
+      localStorage.setItem('currentShopCategory', selectedCategory.toLowerCase());
 
       // Clear active state for all sorting buttons
       sortButtons.forEach((btn) => btn.classList.remove("active"));

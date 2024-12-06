@@ -88,6 +88,7 @@ footer {
     font-family: var(--ff-logo);
     font-size: var(--fs-logo);
     font-weight: 600;
+    padding-right: 30px;
   }
 }
 
@@ -104,12 +105,11 @@ header {
   width: 100%;
   z-index: 999;
 
-  #search-bar {
-    padding: 10px;
+  #search-bar-wrapper {
     width: 100%;
-    max-width: 300px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    max-width: 473px;
+    height: 47px;
+    border: none;
   }
 
   nav ul {
@@ -166,12 +166,13 @@ footer {
     grid-template-columns: subgrid;
     align-items: center;
 
-    padding-block: 2rem;
+    padding-block: 1.75rem 2rem;
     border-top: 1px solid var(--clr-border);
 
     .logo-btn {
       grid-column: span 2;
       justify-self: start;
+      padding-block: 0.25rem 0;
     }
 
     #license {
@@ -181,52 +182,45 @@ footer {
 }
 
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    padding: 1rem;
-    align-items: flex-start;
-    gap: 1rem;
+  .logo-btn {
+    font-size: var(--fs-300) !important;
   }
 
-  header #search-bar {
-    width: 100%;
-    max-width: none;
-    margin-bottom: 1rem;
+  #cart-btn {
+    width: 88px;
+    height: 36px;
+    padding: 5px !important;
+    font-size: 15px;
   }
 
-  header nav ul {
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
+  #shop-btn {
+    font-size: 15px;
   }
 
-  header li {
-    align-self: flex-start;
-  }
+  /* #search-bar-wrapper {
+    min-width: none;
+  } */
 
-  header #cart-btn {
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-  }
-
-  footer {
+  #license {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: flex-end;
+    font-size: 15px;
     text-align: center;
-    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-btn {
+    font-size: var(--fs-200) !important;
   }
 
   footer .content-container {
-    grid-template-columns: 1fr;
-    padding-block: 1rem;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
 
-  footer .logo-btn {
-    grid-column: auto;
-    justify-self: center;
-    margin-bottom: 1rem;
+  #license {
+    font-size: 14px;
   }
 }

@@ -1,84 +1,80 @@
-// Create and inject the search bar dynamically
-const header = document.createElement("header");
-header.classList.add("search-bar-container");
+import './modal.css'
 
-// Search Bar Structure
-const searchBar = document.createElement("div");
-searchBar.classList.add("search-bar");
+export function rendermodal () {
+const link = document.createElement("link");
+link.rel = "stylesheet";
+link.href = "style.css";
+document.head.appendChild(link);
 
-const searchInput = document.createElement("input");
-searchInput.type = "text";
-searchInput.id = "search-bar";
-searchInput.placeholder = "Search";
-searchInput.setAttribute("aria-label", "Search");
+const contentContainer = document.createElement("div");
+contentContainer.className = "content-container";
 
-const searchButton = document.createElement("button");
-searchButton.id = "search-btn";
+const modal = document.createElement("div");
+modal.className = "confirmation-modal";
 
-// Search Icon (SVG)
-searchButton.innerHTML = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85a1.007 1.007 0 0 0-.115-.098zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-  </svg>
-`;
+document.body.style.margin = "0";
+document.body.style.fontFamily = "Arial, sans-serif";
+document.body.style.display = "flex";
+document.body.style.justifyContent = "center";
+document.body.style.alignItems = "center";
+document.body.style.height = "100vh";
+document.body.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; 
 
-// Append elements to the search bar
-searchBar.appendChild(searchInput);
-searchBar.appendChild(searchButton);
+const confirmationContainer = document.createElement("div");
+confirmationContainer.style.backgroundColor = "#4CAF50"; 
+confirmationContainer.style.color = "white";
+confirmationContainer.style.padding = "30px";
+confirmationContainer.style.borderRadius = "10px";
+confirmationContainer.style.textAlign = "center";
+confirmationContainer.style.boxShadow = "0px 4px 6px rgba(0, 0, 0, 0.2)";
+document.body.appendChild(confirmationContainer);
 
-// Append search bar to header
-header.appendChild(searchBar);
+const thankYouMessage = document.createElement("h1");
+thankYouMessage.textContent = "Thank you for shopping with us!";
+confirmationContainer.appendChild(thankYouMessage);
 
-// Append header to the body
-document.body.prepend(header);
+const orderMessage = document.createElement("p");
+orderMessage.textContent =
+  "Your order will be processed and delivered shortly. We at Kenvorisa appreciate your business.";
+orderMessage.style.marginTop = "10px";
+orderMessage.style.fontSize = "18px";
+confirmationContainer.appendChild(orderMessage);
 
-// Search Functionality
-const API_URL = "https://jsonplaceholder.typicode.com/posts";
+const continueButton = document.createElement("button");
+continueButton.textContent = "Continue shopping";
+continueButton.style.marginTop = "20px";
+continueButton.style.padding = "10px 20px";
+continueButton.style.border = "none";
+continueButton.style.borderRadius = "5px";
+continueButton.style.backgroundColor = "white";
+continueButton.style.color = "#4CAF50";
+continueButton.style.cursor = "pointer";
+continueButton.style.fontSize = "16px";
+continueButton.style.fontWeight = "bold";
+confirmationContainer.appendChild(continueButton);
 
-searchButton.addEventListener("click", async () => {
-  const query = searchInput.value.trim();
-
-  if (!query) {
-    alert("Please enter a search term.");
-    return;
-  }
-
-  try {
-    const response = await fetch(API_URL); // No `q` parameter in jsonplaceholder
-    const data = await response.json();
-
-    // Filter results based on query (for demo purposes)
-    const filteredResults = data.filter((item) =>
-      item.title.toLowerCase().includes(query.toLowerCase())
-    );
-
-    displayResults(filteredResults);
-  } catch (error) {
-    console.error("Error fetching search results:", error);
-    alert("An error occurred while searching. Please try again.");
-  }
+continueButton.addEventListener("click", () => {
+  window.location.href = "index.html"; 
 });
 
-function displayResults(results) {
-  const resultsContainer = document.getElementById("results-container");
-  resultsContainer.innerHTML = ""; // Clear old results
+const title = document.createElement("h2");
+title.textContent = "Thank you for shopping with us!";
 
-  if (results.length === 0) {
-    resultsContainer.innerHTML = "<p>No results found.</p>";
-    return;
-  }
+const message = document.createElement("p");
+message.textContent =
+  "Your order will be processed and delivered shortly. We at Kenvorisa appreciate your business.";
 
-  results.forEach((result) => {
-    const resultItem = document.createElement("div");
-    resultItem.className = "result-item";
-    resultItem.textContent = result.title;
-    resultsContainer.appendChild(resultItem);
-  });
+const button = document.createElement("button");
+button.className = "continue-shopping-btn";
+button.textContent = "Continue shopping";
+button.onclick = () => {
+  window.location.href = "shop.html"; 
+};
+
+modal.appendChild(title);
+modal.appendChild(message);
+modal.appendChild(button);
+contentContainer.appendChild(modal);
+document.body.appendChild(contentContainer);
+
 }
-
-// Trigger search on "Enter" key press
-searchInput.addEventListener("keypress", (event) => {
-  if (event.key === "Enter") {
-    searchButton.click();
-  }
-});

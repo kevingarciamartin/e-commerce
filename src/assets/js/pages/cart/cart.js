@@ -75,7 +75,7 @@ class ShoppingCartPage {
           </label>
           <button class="btn-remove">Remove from cart</button>
           <button class="btn-toggle">${
-            item.excluded ? "Include in order" : "Exclude from order"
+            item.exclude ? "Include in order" : "Exclude from order"
           }</button>
         </div>
         <p class="item-price">Price: $${(item.price * item.quantity).toFixed(

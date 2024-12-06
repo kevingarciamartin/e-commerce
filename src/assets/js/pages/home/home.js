@@ -1,12 +1,12 @@
 import "./home.css";
 import { resetMain } from "../../utils/helpers";
 import { renderHero } from "./hero/hero";
-import { renderGraphics } from "./graphics/graphics";
 import { homeProducts } from "./homeproducts/homeproducts";
+import { renderGraphics } from "./graphics/graphics";
 
 export function renderHome() {
   resetMain();
   renderHero();
-  renderGraphics();
   homeProducts("all", 8);
+  renderGraphics();
 }

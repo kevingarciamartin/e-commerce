@@ -1,5 +1,6 @@
+/* Base styles (apply to all screen sizes) */
 .graphics-container {
-  position: relative; /* Allow absolute positioning of children */
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,27 +37,20 @@
   margin: 0 auto;
 }
 
-.graphics-text br,
-.welcome-text br {
-  content: "";
-  display: block;
-}
-
 .welcome-text {
   margin-top: 1.5rem;
 }
 
-/* Circle background */
 .circle-background {
-  position: absolute; /* Position it absolutely within the container */
-  width: 400px; /* Adjust size as needed */
-  height: 400px; /* Adjust size as needed */
-  background-color: rgba(235, 207, 207, 0.5); /* Semi-transparent white */
-  border-radius: 50%; /* Makes it a circle */
-  top: 50%; /* Center vertically */
-  right: 150px; /* Position it on the right side */
-  transform: translateY(-50%); /* Adjust for vertical centering */
-  z-index: -1; /* Send it behind other elements */
+  position: absolute;
+  width: 20vw;
+  height: 20vw;
+  background-color: rgba(235, 207, 207, 0.5);
+  border-radius: 50%;
+  top: 50%;
+  right: 150px;
+  transform: translateY(-50%);
+  z-index: -1;
 }
 
 /* Mobile styles (up to 480px) */
@@ -70,17 +64,24 @@
   }
   .graphics-text,
   .welcome-text {
-    font-size: var(--fs-100); /* Smaller font size for mobile */
+    font-size: var(--fs-100);
+    line-height: 1;
+  }
+  .graphics-text-container {
+    gap: 0.2rem;
+  }
+  .welcome-text {
+    margin-top: 0.2rem;
   }
   .circle-background {
-    width: 210px; /* Default size for desktop */
-    height: 210px; /* Default size for desktop */
-    top: calc(77%); /* Center vertically based on height */
-    right: 10px; /* Default position on the right side */
+    width: 10vw;
+    height: 10vw;
+    top: 77%;
+    right: 10px;
   }
 }
 
-/* Tablet styles (481px to768px) */
+/* Tablet styles (481px to 768px) */
 @media (min-width: 481px) and (max-width: 768px) {
   .graphics-container {
     flex-direction: row;
@@ -92,17 +93,23 @@
   }
   .graphics-text,
   .welcome-text {
-    font-size: var(--fs-100); /* Medium font size for tablet */
+    font-size: 1.7vw;
+  }
+  .graphics-text-container {
+    gap: 1rem;
+  }
+  .welcome-text {
+    margin-top: 0.4rem;
   }
   .circle-background {
-    width: 240px; /* Default size for desktop */
-    height: 240px; /* Default size for desktop */
-    top: calc(48%); /* Center vertically based on height */
-    right: 10px; /* Default position on the right side */
+    width: 30vw;
+    height: 30vw;
+    top: 48%;
+    right: 10px;
   }
 }
 
-/* Desktop styles (above768px) */
+/* Desktop styles (above 768px) */
 @media (min-width: 769px) {
   .graphics-container {
     flex-direction: row;
@@ -113,6 +120,17 @@
   }
   .graphics-text,
   .welcome-text {
-    font-size: var(--fs-300); /* Larger font size for desktop */
+    font-size: 1.2vw;
+  }
+  .graphics-text-container {
+    gap: 1.5rem;
+  }
+  .welcome-text {
+    margin-top: 0.5rem;
+  }
+  .circle-background {
+    width: calc(400px - (400 - 240) * (1920px - 100vw) / (1920 - 768));
+    height: calc(400px - (400 - 240) * (1920px - 100vw) / (1920 - 768));
+    right: calc(150px - (150 - 10) * (1920px - 100vw) / (1920 - 768));
   }
 }

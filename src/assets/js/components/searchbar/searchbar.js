@@ -1,5 +1,4 @@
 import "./searchbar.css";
-
 export function renderSearchbar() {
   // Create and inject the search bar dynamically
   const searchBarWrapper = document.getElementById("search-bar-wrapper");
@@ -31,57 +30,12 @@ export function renderSearchbar() {
   // Append search bar to wrapper
   searchBarWrapper.appendChild(searchBar);
 
-  // Append header to the body
-  //document.body.prepend(header);
+  searchButton.addEventListener("click", () => {
+    const searchValue = searchInput.value.trim().toLowerCase();
+    console.log(searchValue);
 
-  // Search Functionality
-  const API_URL = "https://jsonplaceholder.typicode.com/posts";
 
-  searchButton.addEventListener("click", async () => {
-    const query = searchInput.value.trim();
 
-    if (!query) {
-      alert("Please enter a search term.");
-      return;
-    }
-
-    try {
-      const response = await fetch(API_URL); // No `q` parameter in jsonplaceholder
-      const data = await response.json();
-
-      // Filter results based on query (for demo purposes)
-      const filteredResults = data.filter((item) =>
-        item.title.toLowerCase().includes(query.toLowerCase())
-      );
-
-      displayResults(filteredResults);
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-      alert("An error occurred while searching. Please try again.");
-    }
-  });
-
-  function displayResults(results) {
-    const resultsContainer = document.getElementById("results-container");
-    resultsContainer.innerHTML = ""; // Clear old results
-
-    if (results.length === 0) {
-      resultsContainer.innerHTML = "<p>No results found.</p>";
-      return;
-    }
-
-    results.forEach((result) => {
-      const resultItem = document.createElement("div");
-      resultItem.className = "result-item";
-      resultItem.textContent = result.title;
-      resultsContainer.appendChild(resultItem);
-    });
-  }
-
-  // Trigger search on "Enter" key press
-  searchInput.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-      searchButton.click();
-    }
-  });
+   
+  })
 }

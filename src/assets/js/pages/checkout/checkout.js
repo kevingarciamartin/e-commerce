@@ -1,4 +1,5 @@
 import "./checkout.css";
+import { rendermodal } from "../../components/modal/modal.js";
 import "../../components/orderSummary/orderSummary.css";
 import { resetMain, loadCartFromStorage } from "../../utils/helpers.js";
 import {
@@ -6,7 +7,6 @@ import {
   createOrderSummaryCard,
 } from "../../components/orderSummary/orderSummary.js";
 import { renderPageHeading } from "../../components/pageHeading/pageHeading.js";
-
 export function renderCheckout(cart = []) {
   resetMain();
 
@@ -99,16 +99,18 @@ export function renderCheckout(cart = []) {
   const summaryDiv = document.createElement("div");
   summaryDiv.classList.add("summary-card");
 
-  const modalButton = document.createElement("button");
-  modalButton.textContent = "Pay now";
-  modalButton.type = "button";
-  modalButton.className = "modal-button";
-  modalButton.disabled = true;
+  // Create the "Pay Now" button
+const modalButton = document.createElement("button");
+modalButton.textContent = "Pay now";
+modalButton.type = "button";
+modalButton.className = "modal-button";
+modalButton.disabled = true;
 
-  function handlePayNow() {
-    alert("Thank you for shopping with us!");
-  }
-  modalButton.addEventListener("click", handlePayNow);
+function handlePayNow() {
+  rendermodal(); 
+} 
+
+modalButton.addEventListener("click", handlePayNow); 
 
   const shippingCost = 9.99;
   const orderSummaryCard = createOrderSummaryCard(

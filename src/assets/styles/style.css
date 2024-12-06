@@ -52,13 +52,12 @@
   --fw-regular: 400;
 
   --fw-heading: var(--fw-regular);
-
-  /* Misc. */
-  --body-padding: 3rem;
-  --header-height: 100px;
 }
 
 body {
+  --body-padding: 3rem;
+  --header-height: 100px;
+
   display: grid;
   grid-template-columns:
     var(--body-padding) [content-start]
@@ -101,8 +100,7 @@ header {
   right: 0;
 
   height: var(--header-height);
-  padding: 1rem 3rem;
-  /* Noory's Changes to main CSS files */
+  padding: 1rem var(--body-padding);
   width: 100%;
   z-index: 999;
 
@@ -166,25 +164,32 @@ footer {
 
   .content-container {
     display: grid;
-    grid-template-columns: subgrid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
 
     padding-block: 1.75rem 2rem;
     border-top: 1px solid var(--clr-border);
 
     .logo-btn {
-      grid-column: span 2;
       justify-self: start;
       padding-block: 0.25rem 0;
     }
 
     #license {
-      grid-column: 6 / span all;
+      display: flex;
+      gap: 0.5ch;
+      flex-wrap: wrap;
+      grid-column: 2;
+      justify-self: center;
     }
   }
 }
 
 @media (max-width: 768px) {
+  body {
+    --body-padding: 1rem;
+  }
+
   .logo-btn {
     font-size: var(--fs-300) !important;
   }
@@ -204,6 +209,12 @@ footer {
     min-width: none;
   } */
 
+  footer .content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
   #license {
     display: flex;
     justify-content: flex-end;
@@ -213,14 +224,12 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .logo-btn {
-    font-size: var(--fs-200) !important;
+  body {
+    --body-padding: 0.5rem;
   }
 
-  footer .content-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  .logo-btn {
+    font-size: var(--fs-200) !important;
   }
 
   #license {

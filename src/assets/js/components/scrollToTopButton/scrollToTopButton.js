@@ -15,18 +15,14 @@ export function scrollToTopButton() {
 
   body.appendChild(button);
 
-  // Show the button when scrolling down
-  window.onscroll = function () {
-    const scrollDistance = 200;
-    if (
-      document.body.scrollTop > scrollDistance ||
-      document.documentElement.scrollTop > scrollDistance
-    ) {
-      button.style.display = "block"; // Show button
-    } else {
-      button.style.display = "none"; // Hide button
-    }
-  };
+  window.addEventListener("scroll", () => {
+    const scrollPercentage =
+      window.scrollY /
+      (document.documentElement.scrollHeight - window.innerHeight);
+    const scale = Math.min(scrollPercentage * 3, 1);
+
+    button.style.transform = `scale(${scale})`;
+  });
 
   button.addEventListener("click", () => {
     scrollToTop("smooth");

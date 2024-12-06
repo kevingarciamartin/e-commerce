@@ -5,6 +5,7 @@ import { renderHome } from "./pages/home/home.js";
 import { renderShop } from "./pages/shop/shop.js";
 import { renderCart } from "./pages/cart/cart.js";
 import { renderSearchbar } from "./components/searchbar/searchbar.js";
+import { scrollToTopButton } from "./components/scrollToTopButton/scrollToTopButton.js";
 
 export function app() {
   document.addEventListener("click", (event) => {
@@ -21,4 +22,5 @@ export function app() {
   renderHome();
 
   renderSearchbar();
+  scrollToTopButton();
 }

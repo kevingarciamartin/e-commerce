@@ -162,20 +162,23 @@ footer {
 
   .content-container {
     display: grid;
-    grid-template-columns: subgrid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
 
     padding-block: 1.75rem 2rem;
     border-top: 1px solid var(--clr-border);
 
     .logo-btn {
-      grid-column: span 2;
       justify-self: start;
       padding-block: 0.25rem 0;
     }
 
     #license {
-      grid-column: 6 / span all;
+      display: flex;
+      gap: 0.5ch;
+      flex-wrap: wrap;
+      grid-column: 2;
+      justify-self: center;
     }
   }
 }
@@ -204,6 +207,12 @@ footer {
     min-width: none;
   } */
 
+  footer .content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
   #license {
     display: flex;
     justify-content: flex-end;
@@ -219,12 +228,6 @@ footer {
 
   .logo-btn {
     font-size: var(--fs-200) !important;
-  }
-
-  footer .content-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
   }
 
   #license {

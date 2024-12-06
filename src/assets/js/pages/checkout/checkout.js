@@ -1,4 +1,5 @@
 import "./checkout.css";
+import { rendermodal } from "../../components/modal/modal.js";
 import "../../components/orderSummary/orderSummary.css";
 import { resetMain, loadCartFromStorage } from "../../utils/helpers.js";
 import {
@@ -6,8 +7,6 @@ import {
   createOrderSummaryCard,
 } from "../../components/orderSummary/orderSummary.js";
 import { renderPageHeading } from "../../components/pageHeading/pageHeading.js";
-import { renderModal } from "../../components/modal/modal.js";
-
 export function renderCheckout(cart = []) {
   resetMain();
 
@@ -107,10 +106,11 @@ modalButton.type = "button";
 modalButton.className = "modal-button";
 modalButton.disabled = true;
 
-  function handlePayNow() {
-   // renderModal();
-  }
-  modalButton.addEventListener("click", handlePayNow);
+function handlePayNow() {
+  rendermodal(); 
+} 
+
+modalButton.addEventListener("click", handlePayNow); 
 
   const shippingCost = 9.99;
   const orderSummaryCard = createOrderSummaryCard(

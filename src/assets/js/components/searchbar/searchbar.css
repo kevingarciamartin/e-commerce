@@ -28,17 +28,14 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: var(--clr-logo);
-  margin-right: auto;  /* این باعث می‌شود که لوگو سمت چپ باشد */
+  margin-right: auto;  
 }
 
 #search-bar-wrapper {
   display: flex;
   justify-content: center;
-<<<<<<< HEAD
   align-items: center;
-  flex-grow: 1;  /* این باعث می‌شود که جستجو در وسط قرار بگیرد */
-=======
->>>>>>> f5ab14b0799404666e785b265edf204090e984b0
+  flex-grow: 1;
 }
 
 .search-bar {

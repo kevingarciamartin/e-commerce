@@ -1,6 +1,6 @@
 import "./homeproducts.css";
 import { renderShop } from "../../shop/shop.js";
-import { addToCartFunction } from "../../../utils/helpers.js";
+import { addToCartFunction, scrollToTop } from "../../../utils/helpers.js";
 
 export function homeProducts() {
   const contentContainer = document.querySelector(".content-container");
@@ -98,6 +98,7 @@ export function homeProducts() {
   button.classList.add("home-products-button");
   button.addEventListener("click", () => {
     renderShop();
+    scrollToTop();
   });
   HomeProductsContainer.appendChild(button);
 

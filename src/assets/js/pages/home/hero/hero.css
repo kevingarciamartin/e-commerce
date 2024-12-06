@@ -1,102 +1,162 @@
+/* Default styles (for large screens) */
 .hero-container {
   grid-column: 1 / -1;
   position: relative;
   width: 100%;
-  height: auto;
+  height: calc(
+    100vh - var(--header-height)
+  ); /* Full viewport height minus header */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Ensure vertical centering */
+  align-items: center;
   z-index: 1;
+  animation: fadeIn 1s ease-in;
+  overflow: hidden; /* Prevent overflow outside the container */
 }
 
 .heroimg {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  object-fit: cover; /* Ensure image covers full container */
+  z-index: -1;
 }
 
 .hero-heading {
-  position: absolute;
-  top: calc(23%); /* Adjust as needed */
-  left: calc(15%); /* Adjust this value based on your design */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   color: var(--clr-neutral-900);
-  font-size: var(--fs-600); /* Base font size */
+  font-size: 4.5vw;
   font-weight: 800;
   font-family: var(--ff-poppins);
-  text-align: left; /* Align text to left */
+  text-align: center;
+  margin-bottom: 20px; /* Ensure space below the heading */
 }
 
 .hero-heading-2 {
-  /* New class for the second line */
-  position: absolute; /* Position it absolutely */
-  top: calc(
-    45%
-  ); /* Adjust this value to move it up or down relative to first line */
-  left: calc(11%); /* Keep it aligned with first line */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
   color: var(--clr-neutral-900);
-  font-size: var(--fs-600); /* Base font size */
+  font-size: 4.5vw;
   font-weight: 800;
   font-family: var(--ff-poppins);
+  margin-bottom: 100px;
+  visibility: hidden; /* Initially invisible */
+  opacity: 0; /* Initially invisible */
+  transition: opacity 0.5s ease; /* Smooth transition for fading in */
+}
+
+.hero-heading,
+.hero-heading-2 {
+  line-height: 0.6; /* Adjust line height for spacing */
 }
 
 .line {
-  display: inline-block; /* Ensure each span behaves as an inline element */
+  display: inline-block; /* Ensure each line is treated as a block */
+  border-right: none; /* Initially no cursor */
+  padding-right: none; /* No padding */
+}
+
+.line.blinking {
+  border-right: 2px solid var(--clr-neutral-900); /* Cursor effect */
+  padding-right: 0.5em; /* Space for the cursor */
+  animation: blink-caret 0.75s step-end infinite; /* Blinking effect */
 }
 
 .hero-button {
-  position: absolute;
-  top: calc(56%); /* Position below the heading */
-  left: calc(50% - (50px)); /* Center button horizontally */
-  transform: translate(-50%, -50%);
+  position: relative;
   background-color: var(--clr-green);
   font-family: var(--ff-inter);
   color: white;
   border: none;
   border-radius: 20px;
-  padding: 10px 100px; /* Adjust padding for larger screens */
-  font-size: var(--fs-300); /* Base button font size */
+  padding: 0.52vw 4.13vw; /* Adjust padding */
+  font-size: 1.8vw;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: scaleButton 2s infinite alternate; /* Scale animation */
 }
 
-/* Hover effect */
 .hero-button:hover {
-  background-color: darkgreen; /* Optional hover effect */
+  background-color: var(--clr-green);
+  color: var(--clr-neutral-900);
 }
 
-/* Media Queries for Responsiveness */
+/* Media Query for 768px (Tablets) */
 @media (max-width: 768px) {
-  .hero-heading {
-    /* Apply similar adjustments to both lines if needed */
-    top: calc(27%);
-    left: calc(25%); /* Adjust heading position for smaller screens */
-    font-size: calc(var(--fs-400) * 0.8); /* Scale down font size */
+  .hero-container {
+    height: calc(80vh - var(--header-height)); /* Adjust height for tablets */
   }
+
+  .hero-heading {
+    font-size: 4vw; /* Adjust font size for tablet */
+  }
+
   .hero-heading-2 {
-    /* Apply similar adjustments to both lines if needed */
-    top: calc(41%); /* Adjust heading position for smaller screens */
-    font-size: calc(var(--fs-400) * 0.8); /* Scale down font size */
+    font-size: 4vw; /* Adjust font size for tablet */
+  }
+
+  .line {
+    font-size: 4vw;
   }
 
   .hero-button {
-    top: calc(56%); /* Adjust button position for smaller screens */
-    left: calc(50%);
-    padding: 2px 27px; /* Reduce padding on mobile */
-    font-size: calc(var(--fs-200) * 0.8); /* Scale down button font size */
+    font-size: 2vw; /* Adjust font size for tablet */
+    padding: 0.4vw 4vw; /* Adjust padding for tablet */
+  }
+
+  .heroimg {
+    object-fit: cover; /* Ensure image fits well in tablet view */
+  }
+
+  /* Bring heading and button closer for tablets */
+  .hero-heading {
+    margin-bottom: -50px; /* Reduced margin for closer text and button */
+  }
+
+  .hero-button {
+    margin-top: 10px; /* Reduce margin between button and text */
   }
 }
 
+/* Media Query for 480px (Mobile Phones) */
 @media (max-width: 480px) {
   .hero-heading {
-    top: calc(27%);
-    font-size: calc(var(--fs-300) * 0.6);
+    font-size: 5vw; /* Adjust font size for mobile */
+  }
+
+  .line {
+    font-size: 5vw;
   }
 
   .hero-heading-2 {
-    top: calc(40%);
-    font-size: calc(var(--fs-300) * 0.6);
+    font-size: 5vw; /* Adjust font size for mobile */
   }
 
   .hero-button {
-    top: calc(56%);
-    padding: 3px15px;
-    font-size: calc(var(--fs-100) * 0.6);
+    font-size: 2vw; /* Adjust font size for mobile */
+    padding: 1vw 4vw; /* Adjust padding for mobile */
+  }
+
+  .heroimg {
+    object-fit: cover; /* Ensure image fits well in mobile view */
+  }
+
+  /* Bring heading and button closer for mobile */
+  .hero-heading {
+    margin-bottom: -65px; /* Reduced margin for closer text and button */
+  }
+
+  .hero-button {
+    margin-top: 5px; /* Reduce margin between button and text */
   }
 }

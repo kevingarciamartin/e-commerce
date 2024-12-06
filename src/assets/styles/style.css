@@ -52,13 +52,12 @@
   --fw-regular: 400;
 
   --fw-heading: var(--fw-regular);
-
-  /* Misc. */
-  --body-padding: 3rem;
-  --header-height: 100px;
 }
 
 body {
+  --body-padding: 3rem;
+  --header-height: 100px;
+
   display: grid;
   grid-template-columns:
     var(--body-padding) [content-start]
@@ -101,7 +100,7 @@ header {
   right: 0;
 
   height: var(--header-height);
-  padding: 1rem 3rem;
+  padding: 1rem var(--body-padding);
   width: 100%;
   z-index: 999;
 
@@ -182,6 +181,10 @@ footer {
 }
 
 @media (max-width: 768px) {
+  body {
+    --body-padding: 1rem;
+  }
+
   .logo-btn {
     font-size: var(--fs-300) !important;
   }
@@ -210,6 +213,10 @@ footer {
 }
 
 @media (max-width: 480px) {
+  body {
+    --body-padding: 0.5rem;
+  }
+
   .logo-btn {
     font-size: var(--fs-200) !important;
   }

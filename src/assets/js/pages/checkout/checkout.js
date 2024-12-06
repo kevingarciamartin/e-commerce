@@ -18,9 +18,10 @@ export function renderCheckout(cart = []) {
 
   const main = document.querySelector("main .content-container");
   const checkoutContainer = document.createElement("section");
+  checkoutContainer.className = "checkout-container";
   main.appendChild(checkoutContainer);
 
-  // First section
+  // First section - Enter delivery
   const delivery = document.createElement("h2");
   delivery.textContent = "1. Enter delivery address";
   checkoutContainer.appendChild(delivery);
@@ -59,7 +60,7 @@ export function renderCheckout(cart = []) {
 
   checkoutContainer.appendChild(addressSection);
 
-  // Second section
+  // Second section - Choose payment
   const payment = document.createElement("h2");
   payment.textContent = "2. Select payment method";
   payment.setAttribute("class", "payment-heading");
@@ -90,7 +91,7 @@ export function renderCheckout(cart = []) {
 
   checkoutContainer.appendChild(paymentSection);
 
-  //Third section
+  //Third section - Complete purchase
   const purchase = document.createElement("h2");
   purchase.textContent = "3. Complete purchase";
   checkoutContainer.appendChild(purchase);
@@ -157,30 +158,3 @@ export function renderCheckout(cart = []) {
     radio.addEventListener("change", validateForm);
   });
 }
-
-// const modal = document.createElement("div");
-// modal.className = "modal hidden";
-
-// const modalContent = document.createElement("div");
-// modalContent.className = "modal-content";
-// modalContent.textContent =
-//   "Thank you for shopping with us!\r\n Your order will be processed and delivered shortly. We at Kenvorisa appreciate your business.";
-
-// const closeButton = document.createElement("button");
-// closeButton.textContent = "Continue shopping";
-// closeButton.className = "close-button";
-
-// modalContent.appendChild(closeButton);
-// modal.appendChild(modalContent);
-// checkoutContainer.appendChild(modal);
-
-// modalButton.addEventListener("click", () => {
-//   modal.classList.remove("hidden");
-//   document.body.classList.add("blur-background");
-// });
-
-// closeButton.addEventListener("click", () => {
-//   renderShop();
-//   modal.classList.remove("hidden");
-//   document.body.classList.remove("blur-background");
-// });

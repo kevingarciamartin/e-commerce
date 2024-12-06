@@ -68,13 +68,13 @@ export function renderProducts(
       </div>
     `;
 
-    // Add the event listener after setting innerHTML
+    // Add the event listener to 'Add to cart' button
     productElement
       .querySelector(".add-to-cart-button")
       .addEventListener("click", (e) => {
         const button = e.currentTarget;
 
-        if (button.classList.contains('clicked')) {
+        if (button.classList.contains("clicked")) {
           return;
         }
 

@@ -28,3 +28,14 @@
 #scroll-to-top-btn:hover {
   background-color: hsl(from var(--clr-accent) h s calc(l - 5));
 }
+
+@media (max-width: 480px) {
+  #scroll-to-top-btn {
+    right: 20px;
+  }
+
+  svg {
+    width: 18px;
+    height: 17px;
+  }
+}

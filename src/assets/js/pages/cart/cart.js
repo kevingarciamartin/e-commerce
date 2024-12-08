@@ -17,7 +17,7 @@ export function renderCart() {
   cartPage.renderItemList();
 }
 
-class ShoppingCartPage {
+export class ShoppingCartPage {
   constructor(cart) {
     this.cart = cart;
     this.itemListContainer = document.createElement("section");
@@ -90,6 +90,7 @@ class ShoppingCartPage {
         // Prevent quantity from going below 1
         this.updateQuantity(item.id, item.quantity - 1);
         this.renderItemList();
+        saveCartToStorage(this.cart);
       }
     });
 
@@ -97,6 +98,7 @@ class ShoppingCartPage {
       if (item.quantity < 100) {
         this.updateQuantity(item.id, item.quantity + 1);
         this.renderItemList();
+        saveCartToStorage(this.cart);
       }
     });
 

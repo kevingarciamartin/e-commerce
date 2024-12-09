@@ -61,42 +61,40 @@ describe('Add to cart function check', () => {
     });
 }) 
 
-
-
 describe('check calculateTotal', () => {
     test('calculates total price for items in the cart, excluding excluded items', () => {
         const cart = [
-        { id: 1, name: 'Item 1', price: 10, quantity: 2, exclude: false },
-        { id: 2, name: 'Item 2', price: 20, quantity: 1, exclude: false },
-        { id: 3, name: 'Item 3', price: 15, quantity: 3, exclude: true },
+        { id: 222, name: 'rose', price: 10, quantity: 2, exclude: false },
+        { id: 888, name: 'daffodil', price: 20, quantity: 1, exclude: true },
+        { id: 777, name: 'sunflower', price: 15, quantity: 3, exclude: true },
         ];
 
         const total = calculateTotal(cart);
-        expect(total).toBe(40);
+        expect(total).toBe(20);
     });
 
-    test('handles an empty cart', () => {
+    test('handle empty cart', () => {
         const cart = [];
         const total = calculateTotal(cart);
         expect(total).toBe(0);
     });
 
-    test('handles a cart with all items excluded', () => {
+    test('handle cart with all items excluded', () => {
         const cart = [
-        { id: 1, name: 'Item 1', price: 10, quantity: 2, exclude: true },
-        { id: 2, name: 'Item 2', price: 20, quantity: 1, exclude: true },
+        { id: 888, name: 'daffodil', price: 20, quantity: 1, exclude: true },
+        { id: 777, name: 'sunflower', price: 15, quantity: 3, exclude: true },
         ];
         const total = calculateTotal(cart);
         expect(total).toBe(0);
     });
 
-    test('handles items with quantity 0', () => {
+    test('handle items with quantity 0', () => {
         const cart = [
-            { id: 1, name: 'Item 1', price: 10, quantity: 0, exclude: false },
-            { id: 2, name: 'Item 2', price: 20, quantity: 1, exclude: false },
+            { id: 222, name: 'rose', price: 10, quantity: 0, exclude: false },
+            { id: 111, name: 'lily', price: 2, quantity: 5, exclude: false },
         ];
 
         const total = calculateTotal(cart);
-        expect(total).toBe(20); 
+        expect(total).toBe(10); 
     });
 });

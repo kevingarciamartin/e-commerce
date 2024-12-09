@@ -28,7 +28,7 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: var(--clr-logo);
-  margin-right: auto;  
+  margin-right: auto;
 }
 
 #search-bar-wrapper {
@@ -104,5 +104,16 @@ body {
 @media (max-width: 768px) {
   .search-bar {
     max-width: 270px;
+  }
+  #search-bar {
+    max-width: 120px;
+  }
+}
+@media (max-width: 480px) {
+  .search-bar {
+    max-width: 250px;
+  }
+  #search-bar {
+    max-width: 100px;
   }
 }

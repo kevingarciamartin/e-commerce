@@ -68,20 +68,19 @@ class ShoppingCartPage {
       <div class="item-details">
         <h3>${item.title}</h3>
         <div class="item-controls">
+        <div class="quantity">
           <label>
-            Qty: <span class="minus">-</span><input type="number" value="${
+            <span class="minus">−</span><input type="number" value="${
               item.quantity
-            }"  min="10" max="100" class="quantity-input">
-            <span class="plus">+</span>
+            }"min="1" max="100" class="quantity-input"><span class="plus">+</span>
           </label>
+          </div>
           <button class="btn-remove">Remove from cart</button>
           <button class="btn-toggle">${
             item.exclude ? "Include in order" : "Exclude from order"
           }</button>
         </div>
-        <p class="item-price">Price: $${(item.price * item.quantity).toFixed(
-          2
-        )}</p>
+        <p class="item-price">$${(item.price * item.quantity).toFixed(2)}</p>
       </div>
     `;
 

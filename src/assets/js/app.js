@@ -11,8 +11,10 @@ import { scrollToTop } from "./utils/helpers.js";
 export function app() {
   document.addEventListener("click", (event) => {
     if (event.target.classList.contains("logo-btn")) renderHome();
-    else if (event.target.id === "shop-btn") renderShop();
-    else if (event.target.id === "cart-btn") renderCart();
+    else if (event.target.id === "shop-btn" || event.target.id === "shop-icon")
+      renderShop();
+    else if (event.target.id === "cart-btn" || event.target.id === "cart-icon")
+      renderCart();
 
     if (
       event.target.classList.contains("logo-btn") ||

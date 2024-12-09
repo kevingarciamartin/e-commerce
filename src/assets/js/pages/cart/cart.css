@@ -12,7 +12,8 @@
 }
 
 .cart-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 7rem 1fr;
   gap: 20px;
   width: 51.3125rem;
   height: 9.9375rem;

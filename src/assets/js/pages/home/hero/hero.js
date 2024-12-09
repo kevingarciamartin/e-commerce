@@ -1,6 +1,6 @@
 import "./hero.css";
 import hero from "../../../../images/Hero.jpg";
-//import { renderShop } from "./src/assets/js/pages/shop/shop.js";
+import { renderShop } from "../../shop/shop.js";
 
 export function renderHero() {
   const main = document.querySelector("main");
@@ -13,25 +13,23 @@ export function renderHero() {
   const heading = document.createElement("h1");
   heading.classList.add("hero-heading");
 
-  // Create a div for the first line
-  const line1Wrapper = document.createElement("div");
+  // Create spans for each line
   const line1 = document.createElement("span");
   line1.textContent = "We have everything you need";
-  line1.classList.add("line"); // Add a class for line styling
-  line1.style.display = "none"; // Initially hide the line
-  line1Wrapper.appendChild(line1);
+  line1.classList.add("line");
 
-  // Create a div for the second line
-  const line2Wrapper = document.createElement("div");
   const line2 = document.createElement("span");
   line2.textContent = "for this holiday season!";
-  line2.classList.add("line", "hero-heading-2"); // Add a class for line styling and new heading
-  line2.style.display = "none"; // Initially hide the line
-  line2Wrapper.appendChild(line2);
+  line2.classList.add("line", "hero-heading-2");
 
-  heading.appendChild(line1Wrapper);
-  heading.appendChild(document.createElement("br")); // Add a line break
-  heading.appendChild(line2Wrapper); // Append both lines initially
+  // Set initial styles for line2
+  line2.style.visibility = "hidden"; // Start as hidden
+  line2.style.opacity = "0"; // Start invisible
+
+  // Append lines to the heading with a line break in between
+  heading.appendChild(line1);
+  heading.appendChild(document.createElement("br"));
+  heading.appendChild(line2);
 
   heroContainer.appendChild(heading);
 
@@ -74,34 +72,53 @@ export function renderHero() {
 function startTypingAnimation(line1, line2) {
   let index1 = 0;
   let index2 = 0;
-  const text1 = line1.textContent;
-  const text2 = line2.textContent;
+  const text1 = "We have everything you need";
+  const text2 = "for this holiday season!";
 
   const typingSpeed = 80; // Speed of typing in milliseconds
 
-  // Display the first line and start typing effect for it
-  line1.style.display = "inline"; // Show the first line
+  // Start typing effect for the first line
   const typingInterval1 = setInterval(() => {
     if (index1 < text1.length) {
       line1.textContent = text1.slice(0, index1 + 1);
       index1++;
     } else {
       clearInterval(typingInterval1);
-      // Start typing effect for the second line without displaying it first
+      // Stop blinking effect after typing is done
+      line1.classList.remove("blinking"); // Remove blinking class
+
+      // Prepare for typing effect for the second line
+      index2 = 0; // Reset index for second line typing
+
+      // Only reveal line2 now and start typing it
       setTimeout(() => {
-        index2 = 0; // Reset index for second line
-        const typingInterval2 = setInterval(() => {
-          if (index2 < text2.length) {
-            if (index2 === 0) {
-              line2.style.display = "inline"; // Show second line when starting to type
-            }
-            line2.textContent = text2.slice(0, index2 + 1);
-            index2++;
-          } else {
-            clearInterval(typingInterval2);
-          }
-        }, typingSpeed);
-      }, 500); // Delay before starting the second line's typing effect
+        // Show line2 (without blinking cursor)
+        line2.style.visibility = "visible"; // Make it visible
+        line2.style.opacity = "1"; // Fade it in
+
+        // Start typing for line2 (after revealing it)
+        startTypingSecondLine(line2, text2, typingSpeed);
+      }, 300); // Delay the reveal and start typing effect after a short period
+    }
+  }, typingSpeed);
+}
+
+function startTypingSecondLine(line2, text2, typingSpeed) {
+  let index2 = 0;
+
+  // Only add the blinking cursor when typing starts
+  setTimeout(() => {
+    line2.classList.add("blinking"); // Add blinking cursor class here (just before typing)
+  }, 200); // A short delay before adding the blinking cursor
+
+  const typingInterval2 = setInterval(() => {
+    if (index2 < text2.length) {
+      line2.textContent = text2.slice(0, index2 + 1); // Append one character at a time
+      index2++;
+    } else {
+      clearInterval(typingInterval2);
+      // Stop blinking effect after typing is done
+      line2.classList.remove("blinking"); // Remove blinking class
     }
   }, typingSpeed);
 }

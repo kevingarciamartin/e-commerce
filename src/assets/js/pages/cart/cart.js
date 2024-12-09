@@ -3,31 +3,34 @@ import {
   resetMain,
   loadCartFromStorage,
   saveCartToStorage,
+  scrollToTop,
 } from "../../utils/helpers";
 import { renderCheckout } from "../checkout/checkout";
 import { createOrderSummaryCard } from "../../components/orderSummary/orderSummary";
+import { renderPageHeading } from "../../components/pageHeading/pageHeading";
 
 export function renderCart() {
   resetMain();
+  renderPageHeading("Shopping cart");
 
   const cart = loadCartFromStorage();
   const cartPage = new ShoppingCartPage(cart);
   cartPage.renderItemList();
 }
 
-class ShoppingCartPage {
+export class ShoppingCartPage {
   constructor(cart) {
     this.cart = cart;
-    this.itemListContainer = document.querySelector(".content-container");
+    this.itemListContainer = document.createElement("section");
   }
 
   renderItemList() {
+    this.contentContainer = document.querySelector(".content-container");
+    this.itemListContainer.classList.add("cart-container");
     this.itemListContainer.innerHTML = `
-      <h1 class="page-heading-container">Shopping cart</h1>
-      <div class="cart-container">
-        <div class="cart-list"></div>
-      </div>
+      <div class="cart-list"></div>
     `;
+    this.contentContainer.appendChild(this.itemListContainer);
     this.cartList = this.itemListContainer.querySelector(".cart-list");
 
     this.cart.forEach((item) => {
@@ -44,6 +47,7 @@ class ShoppingCartPage {
     continueToPaymentButton.className = "continue-to-payment-btn";
     continueToPaymentButton.addEventListener("click", () => {
       renderCheckout();
+      scrollToTop();
     });
 
     const orderSummaryCard = createOrderSummaryCard(
@@ -52,8 +56,7 @@ class ShoppingCartPage {
       () => renderCheckout(this.cart)
     );
 
-    this.cartContainer =
-      this.itemListContainer.querySelector(".cart-container");
+    this.cartContainer = this.itemListContainer;
     this.cartContainer.appendChild(orderSummaryCard);
   }
 
@@ -67,20 +70,19 @@ class ShoppingCartPage {
       <div class="item-details">
         <h3>${item.title}</h3>
         <div class="item-controls">
+        <div class="quantity">
           <label>
-            Qty: <span class="minus">-</span><input type="number" value="${
+            <span class="minus">−</span><input type="number" value="${
               item.quantity
-            }"  min="10" max="100" class="quantity-input">
-            <span class="plus">+</span>
+            }"min="1" max="100" class="quantity-input"><span class="plus">+</span>
           </label>
+          </div>
           <button class="btn-remove">Remove from cart</button>
           <button class="btn-toggle">${
-            item.excluded ? "Include in order" : "Exclude from order"
+            item.exclude ? "Include in order" : "Exclude from order"
           }</button>
         </div>
-        <p class="item-price">Price: $${(item.price * item.quantity).toFixed(
-          2
-        )}</p>
+        <p class="item-price">$${(item.price * item.quantity).toFixed(2)}</p>
       </div>
     `;
 
@@ -89,6 +91,7 @@ class ShoppingCartPage {
         // Prevent quantity from going below 1
         this.updateQuantity(item.id, item.quantity - 1);
         this.renderItemList();
+        saveCartToStorage(this.cart);
       }
     });
 
@@ -96,6 +99,7 @@ class ShoppingCartPage {
       if (item.quantity < 100) {
         this.updateQuantity(item.id, item.quantity + 1);
         this.renderItemList();
+        saveCartToStorage(this.cart);
       }
     });
 

@@ -1,4 +1,7 @@
-export function rendermodal() {
+import { renderShop } from "../../pages/shop/shop";
+import { scrollToTop } from "../../utils/helpers";
+
+export function renderModal() {
   // Create the background overlay for modal
   const modalBackground = document.createElement("div");
   modalBackground.className = "modal-background";
@@ -7,7 +10,7 @@ export function rendermodal() {
   modalBackground.style.left = "0";
   modalBackground.style.width = "100%";
   modalBackground.style.height = "100%";
-  modalBackground.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  modalBackground.style.backdropFilter = "blur(6px)";
   modalBackground.style.zIndex = "999"; // Keep it above other content
   modalBackground.style.display = "flex";
   modalBackground.style.justifyContent = "center";
@@ -17,7 +20,7 @@ export function rendermodal() {
 
   // Create the confirmation container (green box)
   const confirmationContainer = document.createElement("div");
-  confirmationContainer.style.backgroundColor = "#4CAF50"; 
+  confirmationContainer.style.backgroundColor = "#426b1f"; 
   confirmationContainer.style.color = "white";
   confirmationContainer.style.padding = "30px";
   confirmationContainer.style.borderRadius = "10px";
@@ -27,6 +30,7 @@ export function rendermodal() {
 
   // Add the "Thank you" message
   const thankYouMessage = document.createElement("h1");
+  thankYouMessage.style.margin = '0'
   thankYouMessage.textContent = "Thank you for shopping with us!";
   confirmationContainer.appendChild(thankYouMessage);
 
@@ -45,7 +49,7 @@ export function rendermodal() {
   continueButton.style.border = "none";
   continueButton.style.borderRadius = "5px";
   continueButton.style.backgroundColor = "white";
-  continueButton.style.color = "#4CAF50";
+  continueButton.style.color = "#426b1f";
   continueButton.style.cursor = "pointer";
   continueButton.style.fontSize = "16px";
   continueButton.style.fontWeight = "bold";
@@ -53,7 +57,9 @@ export function rendermodal() {
 
   // Add the functionality for the button
   continueButton.addEventListener("click", () => {
-    window.location.href = "index.html"; // Redirect to the homepage
+    renderShop()
+    closeModal()
+    scrollToTop()
   });
 
   // Function to close the modal and the dark background

@@ -29,7 +29,7 @@
 .graphics-text,
 .welcome-text {
   font-family: var(--ff-poppins);
-  font-size: var(--fs-300);
+  font-size: var(--fs-400);
   font-weight: bold;
   color: var(--clr-text);
   line-height: 1.6;

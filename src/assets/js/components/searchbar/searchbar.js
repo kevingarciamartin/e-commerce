@@ -1,4 +1,4 @@
-import './searchbar.css'
+import "./searchbar.css";
 
 export function renderSearchbar() {
   const searchBarWrapper = document.getElementById("search-bar-wrapper");
@@ -10,7 +10,7 @@ export function renderSearchbar() {
   const searchInput = document.createElement("input");
   searchInput.type = "text";
   searchInput.id = "search-bar";
-  searchInput.placeholder = "Search for products...";
+  searchInput.placeholder = "Search...";
   searchInput.setAttribute("aria-label", "Search");
 
   const searchButton = document.createElement("button");
@@ -37,14 +37,16 @@ export function renderSearchbar() {
   fetch("https://fakestoreapi.com/products")
     .then((response) => response.json())
     .then((data) => {
-      products = data; 
+      products = data;
     })
     .catch((error) => {
       console.error("Error fetching products:", error);
     });
 
-  // Event Listener 
+  // Event Listener
   searchButton.addEventListener("click", () => {
+    resultsContainer.style.display = "block";
+
     const searchValue = searchInput.value.trim().toLowerCase();
     const results = products.filter((product) =>
       product.title.toLowerCase().includes(searchValue)
@@ -59,6 +61,8 @@ export function renderSearchbar() {
 
     if (!isClickInsideSearchbar) {
       resultsContainer.innerHTML = ""; // Clear search results
+      resultsContainer.style.display = "none";
+      searchInput.value = "";
     }
   });
 }

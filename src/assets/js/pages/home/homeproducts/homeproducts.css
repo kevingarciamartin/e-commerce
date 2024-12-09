@@ -12,8 +12,6 @@
   color: var(--clr-neutral-100);
   background-color: var(--clr-green);
   border-radius: 20px;
-  width: 27.57vw;
-  height: 3.68vw;
   border: none;
   cursor: pointer;
   display: block;
@@ -33,7 +31,6 @@
 @media (max-width: 480px) {
   .homeproduct {
     display: grid;
-    grid-template-columns: auto;
     gap: 1rem;
     justify-content: center;
   }

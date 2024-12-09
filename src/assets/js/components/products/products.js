@@ -12,8 +12,8 @@ export function renderProducts(
   limit = null
 ) {
   currentCategory = category;
-  localStorage.setItem('currentShopCategory', category);
-  
+  localStorage.setItem("currentShopCategory", category);
+
   let products = getProducts(category);
 
   switch (sortBy) {

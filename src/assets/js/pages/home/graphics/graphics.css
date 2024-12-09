@@ -23,7 +23,7 @@
   flex-direction: column;
   gap: 0.1rem; /* Reduced from 1rem to bring text closer together */
   text-align: center;
-  font-size: 1.6vw;
+  font-size: var(--fs-400);
   width: 100%;
 }
 
@@ -56,8 +56,7 @@
   }
   .graphics-text,
   .welcome-text {
-    font-size: 3vw;
-    line-height: 0.5;
+    font-size: var(--fs-100);
     margin-right: 0;
   }
   .graphics-text-container {
@@ -75,21 +74,23 @@
 }
 
 /* Tablet styles (481px to 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 1340px) {
   .graphics-container {
-    flex-direction: row;
     gap: 2rem;
   }
   .graphics-image {
-    max-width: 50%;
     margin-bottom: 0;
+  }
+  .graphics-text-container {
+    align-items: center;
   }
   .graphics-text,
   .welcome-text {
-    font-size: 1.6vw;
+    font-size: var(--fs-200);
     margin-right: 0;
   }
   .circle-background {
+    display: none;
     width: 30vw;
     height: 30vw;
     top: 20%;
@@ -98,15 +99,22 @@
 }
 
 /* New media query for gradual font size reduction */
-@media (min-width: 769px) and (max-width: 1920px) {
+@media (max-width: 1540px) {
   .graphics-text,
   .welcome-text {
-    font-size: calc(1.1vw + (11 - 1.1) * ((100vw - 769px) / (1920 - 769)));
+    font-size: var(--fs-300);
+  }
+}
+
+@media (max-width: 1340px) {
+  .graphics-text,
+  .welcome-text {
+    font-size: var(--fs-200);
   }
 }
 
 /* Desktop styles (above 768px) */
-@media (min-width: 769px) {
+@media (min-width: 1340px) {
   .graphics-container {
     flex-direction: row;
     gap: 2rem;

@@ -52,13 +52,12 @@
   --fw-regular: 400;
 
   --fw-heading: var(--fw-regular);
-
-  /* Misc. */
-  --body-padding: 3rem;
-  --header-height: 100px;
 }
 
 body {
+  --body-padding: 3rem;
+  --header-height: 100px;
+
   display: grid;
   grid-template-columns:
     var(--body-padding) [content-start]
@@ -101,7 +100,7 @@ header {
   right: 0;
 
   height: var(--header-height);
-  padding: 1rem 3rem;
+  padding: 1rem var(--body-padding);
   width: 100%;
   z-index: 999;
 
@@ -145,11 +144,20 @@ header {
     background-color: var(--clr-green);
     color: white;
   }
+
+  #shop-icon,
+  #cart-icon {
+    width: 30px;
+    height: 30px;
+    fill: currentColor;
+  }
 }
 
 main {
   display: grid;
   grid-template-columns: subgrid;
+
+  /* Noory's Changes to main CSS files */
 
   grid-column: 1 / -1;
 }
@@ -163,25 +171,32 @@ footer {
 
   .content-container {
     display: grid;
-    grid-template-columns: subgrid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
 
     padding-block: 1.75rem 2rem;
     border-top: 1px solid var(--clr-border);
 
     .logo-btn {
-      grid-column: span 2;
       justify-self: start;
       padding-block: 0.25rem 0;
     }
 
     #license {
-      grid-column: 6 / span all;
+      display: flex;
+      gap: 0.5ch;
+      flex-wrap: wrap;
+      grid-column: 2;
+      justify-self: center;
     }
   }
 }
 
 @media (max-width: 768px) {
+  body {
+    --body-padding: 1rem;
+  }
+
   .logo-btn {
     font-size: var(--fs-300) !important;
   }
@@ -197,9 +212,11 @@ footer {
     font-size: 15px;
   }
 
-  /* #search-bar-wrapper {
-    min-width: none;
-  } */
+  footer .content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 
   #license {
     display: flex;
@@ -210,17 +227,107 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .logo-btn {
-    font-size: var(--fs-200) !important;
+  body {
+    --body-padding: 0.5rem;
+  }
+
+  header .logo-btn {
+    font-size: 0 !important;
+    position: relative;
+  }
+
+  header .logo-btn::before {
+    content: "K";
+    font-size: var(--fs-200);
+    position: absolute;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  ul {
+    padding-left: 15px;
+  }
+
+  header nav ul {
+    margin: 0;
+    gap: 0.5rem;
+  }
+
+  #cart-btn {
+    font-size: 0 !important;
+    width: 50px;
+    height: 50px;
+    padding: 20px;
+    display: flex;
+    padding: 5px !important;
+  }
+
+  #shop-btn {
+    font-size: 0 !important;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   footer .content-container {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    align-items: flex-start;
   }
 
   #license {
     font-size: 14px;
+    padding-left: 6px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+  .logo-btn {
+    font-size: var(--fs-300) !important;
+  }
+
+  #search-bar-wrapper {
+    min-width: 100px;
+  }
+
+  nav {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  #cart-btn {
+    width: 88px;
+    height: 36px;
+    padding: 5px !important;
+    font-size: 15px;
+  }
+
+  #shop-btn {
+    font-size: 15px;
+  }
+
+  #license {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 15px;
+    text-align: left;
+  }
+}
+
+@media (min-width: 480px) {
+  #shop-icon,
+  #cart-icon {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  #license {
+    width: 330px;
+    justify-content: center;
   }
 }

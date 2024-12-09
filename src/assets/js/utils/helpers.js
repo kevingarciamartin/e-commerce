@@ -40,3 +40,7 @@ export const addToCartFunction = (product) => {
 export function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+export function scrollToTop(scrollBehavior = 'auto') {
+  window.scrollTo({ top: 0, behavior: scrollBehavior });
+}

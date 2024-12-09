@@ -26,7 +26,6 @@
 @media (max-width: 480px) {
   .homeproduct {
     display: grid;
-    grid-template-columns: auto;
     gap: 1rem;
     justify-content: center;
   }

@@ -126,4 +126,15 @@ body {
   .search-bar {
     max-width: 270px;
   }
+  #search-bar {
+    max-width: 120px;
+  }
+}
+@media (max-width: 480px) {
+  .search-bar {
+    max-width: 250px;
+  }
+  #search-bar {
+    max-width: 100px;
+  }
 }

@@ -1,5 +1,6 @@
 import { addToCartFunction,loadCartFromStorage,saveCartToStorage,resetMain } from "../assets/js/utils/helpers";
 import { ShoppingCartPage } from "../assets/js/pages/cart/cart";
+import { calculateTotal } from '../assets/js/components/orderSummary/orderSummary';
 
 describe('Shopping Cart Page', () => {
     let cartPage;
@@ -59,3 +60,43 @@ describe('Add to cart function check', () => {
         expect(loadCartFromStorage()[0].quantity).toBe(2);
     });
 }) 
+
+
+
+describe('check calculateTotal', () => {
+    test('calculates total price for items in the cart, excluding excluded items', () => {
+        const cart = [
+        { id: 1, name: 'Item 1', price: 10, quantity: 2, exclude: false },
+        { id: 2, name: 'Item 2', price: 20, quantity: 1, exclude: false },
+        { id: 3, name: 'Item 3', price: 15, quantity: 3, exclude: true },
+        ];
+
+        const total = calculateTotal(cart);
+        expect(total).toBe(40);
+    });
+
+    test('handles an empty cart', () => {
+        const cart = [];
+        const total = calculateTotal(cart);
+        expect(total).toBe(0);
+    });
+
+    test('handles a cart with all items excluded', () => {
+        const cart = [
+        { id: 1, name: 'Item 1', price: 10, quantity: 2, exclude: true },
+        { id: 2, name: 'Item 2', price: 20, quantity: 1, exclude: true },
+        ];
+        const total = calculateTotal(cart);
+        expect(total).toBe(0);
+    });
+
+    test('handles items with quantity 0', () => {
+        const cart = [
+            { id: 1, name: 'Item 1', price: 10, quantity: 0, exclude: false },
+            { id: 2, name: 'Item 2', price: 20, quantity: 1, exclude: false },
+        ];
+
+        const total = calculateTotal(cart);
+        expect(total).toBe(20); 
+    });
+});

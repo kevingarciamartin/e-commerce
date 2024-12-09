@@ -1,4 +1,8 @@
 #scroll-to-top-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
   position: fixed;
   bottom: 20px;
   right: 30px;

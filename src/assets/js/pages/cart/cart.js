@@ -3,6 +3,7 @@ import {
   resetMain,
   loadCartFromStorage,
   saveCartToStorage,
+  scrollToTop,
 } from "../../utils/helpers";
 import { renderCheckout } from "../checkout/checkout";
 import { createOrderSummaryCard } from "../../components/orderSummary/orderSummary";
@@ -46,6 +47,7 @@ export class ShoppingCartPage {
     continueToPaymentButton.className = "continue-to-payment-btn";
     continueToPaymentButton.addEventListener("click", () => {
       renderCheckout();
+      scrollToTop();
     });
 
     const orderSummaryCard = createOrderSummaryCard(

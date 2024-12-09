@@ -55,6 +55,18 @@ export function renderSearchbar() {
     displayResults(results, resultsContainer);
   });
 
+  // Event Listener for Enter key press
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      const searchValue = searchInput.value.trim().toLowerCase();
+      const results = products.filter((product) =>
+        product.title.toLowerCase().includes(searchValue)
+      );
+
+      displayResults(results, resultsContainer);
+    }
+  });
+
   // Hide results when clicking outside
   document.addEventListener("click", (event) => {
     const isClickInsideSearchbar = searchBarWrapper.contains(event.target);
@@ -86,11 +98,6 @@ function displayResults(results, container) {
         <p>Price: $${product.price}</p>
       </div>
     `;
-
-    // Add click event listener for redirecting to product details page
-    li.addEventListener("click", () => {
-      window.location.href = `/product-details?id=${product.id}`;
-    });
 
     ul.appendChild(li);
   });

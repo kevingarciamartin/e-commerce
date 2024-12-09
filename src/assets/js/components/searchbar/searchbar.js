@@ -10,7 +10,7 @@ export function renderSearchbar() {
   const searchInput = document.createElement("input");
   searchInput.type = "text";
   searchInput.id = "search-bar";
-  searchInput.placeholder = "Search for products...";
+  searchInput.placeholder = "Search...";
   searchInput.setAttribute("aria-label", "Search");
 
   const searchButton = document.createElement("button");

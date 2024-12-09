@@ -114,12 +114,12 @@
 }
 
 .product-description {
-  font-size: var(--fs-product);
+  font-size: var(--fs-100);
   font-weight: 400;
   font-family: var(--ff-poppins);
   color: var(--clr-neutral-900);
   margin-top: 10px;
   line-height: 1.4;
   overflow: auto;
-  height: 250px;
+  height: 228px;
 }

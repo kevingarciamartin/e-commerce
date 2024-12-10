@@ -41,15 +41,6 @@ export class ShoppingCartPage {
       this.cartList.appendChild(itemElement);
     });
 
-    const continueToPaymentButton = document.createElement("button");
-    continueToPaymentButton.textContent = "Continue to payment";
-    continueToPaymentButton.type = "button";
-    continueToPaymentButton.className = "continue-to-payment-btn";
-    continueToPaymentButton.addEventListener("click", () => {
-      renderCheckout();
-      scrollToTop();
-    });
-
     const orderSummaryCard = createOrderSummaryCard(
       this.cart,
       "Continue to payment",

@@ -52,6 +52,7 @@ export function createOrderSummaryCard(
     paymentButton = document.createElement("button");
     paymentButton.textContent = buttonName;
     paymentButton.className = "continue-to-payment-btn";
+    paymentButton.disabled = totalQuantity === 0 ? true : false;
     paymentButton.addEventListener("click", paymentFunction);
   }
 

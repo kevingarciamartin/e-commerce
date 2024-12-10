@@ -39,7 +39,6 @@ export function renderHero() {
   button.classList.add("hero-button");
   button.addEventListener("click", () => {
     renderShop();
-    history.pushState(null, "", "/shop");
   });
 
   heroContainer.appendChild(button);

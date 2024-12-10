@@ -63,7 +63,9 @@ h2 {
 }
 
 .payment-section label {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 473px;
   height: 47px;
   padding: 10px;

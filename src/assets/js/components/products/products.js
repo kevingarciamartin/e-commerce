@@ -49,13 +49,45 @@ export function renderProducts(
     const productElement = document.createElement("div");
     productElement.classList.add("product");
 
+    // Create the size selection dropdown only if it's not an electronic product
+    let sizeSelect = "";
+    if (product.category !== "electronics") {
+      // Check if the product is NOT electronics
+      const sizeOptions = ["XS", "S", "M", "L", "XL", "XXL"];
+      sizeSelect = document.createElement("select");
+      sizeSelect.classList.add("size-select");
+
+      sizeOptions.forEach((size) => {
+        const option = document.createElement("option");
+        option.value = size;
+        option.textContent = size;
+        sizeSelect.appendChild(option);
+      });
+
+      // Default selected size
+      let selectedSize = sizeOptions[0];
+      sizeSelect.addEventListener("change", (e) => {
+        selectedSize = e.target.value; // Update selectedSize when changed
+      });
+    }
+
     productElement.innerHTML = `
       <img src="${product.image}" alt="${product.title}" class="product-image"/>
       <div class="title-price">
         <h3 class="product-title">${product.title}</h3>
         <p class="product-price">$${product.price}</p>
       </div>
-      <p class="product-description hidden">${product.description}</p>
+      <div class="size-selection">
+        ${
+          product.category !== "electronics"
+            ? `<label for="size">Size:</label>${sizeSelect.outerHTML}`
+            : "" // Render size dropdown only if not electronics
+        }
+      </div>
+      <div class="product-description hidden">
+        <h3>Description</h3>
+        <p >${product.description}</p>
+        </div>
       <div class="svg-button">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-info">
           <title>information-outline</title>
@@ -81,7 +113,18 @@ export function renderProducts(
         button.classList.add("clicked");
         button.disabled = true;
 
-        addToCartFunction(product);
+        const selectedSize =
+          product.category !== "electronics"
+            ? productElement.querySelector(".size-select").value
+            : null; // Only get size if not electronics
+
+        const selectedProduct = {
+          ...product,
+          size: selectedSize, // Pass the selected size or null
+        };
+
+        // Your existing logic for adding the item to the cart
+        addToCartFunction(selectedProduct);
 
         setTimeout(() => {
           button.classList.remove("clicked");
@@ -97,15 +140,18 @@ export function renderProducts(
       const productDescription = productElement.querySelector(
         ".product-description"
       );
+      const sizeSelection = productElement.querySelector(".size-selection");
 
       // Toggle visibility of elements
       if (productDescription.classList.contains("hidden")) {
         titlePrice.style.display = "none";
         productImage.style.display = "none";
+        if (sizeSelection) sizeSelection.style.display = "none"; // Hide size dropdown if exists
         productDescription.classList.remove("hidden");
       } else {
         titlePrice.style.display = "flex";
         productImage.style.display = "block";
+        if (sizeSelection) sizeSelection.style.display = "flex"; // Show size dropdown if exists
         productDescription.classList.add("hidden");
       }
     });

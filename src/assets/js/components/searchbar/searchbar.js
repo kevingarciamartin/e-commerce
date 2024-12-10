@@ -46,20 +46,20 @@ export function renderSearchbar() {
   // Event Listener
   searchButton.addEventListener("click", () => {
     resultsContainer.style.display = "block";
-    
+
     const searchValue = searchInput.value.trim().toLowerCase();
     const results = products.filter((product) =>
       product.title.toLowerCase().includes(searchValue)
-  );
-  
-  displayResults(results, resultsContainer);
-});
+    );
 
-// Event Listener for Enter key press
-searchInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
+    displayResults(results, resultsContainer);
+  });
+
+  // Event Listener for Enter key press
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
       resultsContainer.style.display = "block";
-      
+
       const searchValue = searchInput.value.trim().toLowerCase();
       const results = products.filter((product) =>
         product.title.toLowerCase().includes(searchValue)

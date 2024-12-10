@@ -60,6 +60,11 @@ export class ShoppingCartPage {
       <img src="${item.image}" alt="${item.title}" class="item-image">
       <div class="item-details">
         <h3>${item.title}</h3>
+          ${
+            item.category !== "electronics"
+              ? `<p class="cart-item-size">Size: ${item.size}</p>` // Show size for non-electronics
+              : "" // Do not render size for electronics
+          }
         <div class="item-controls">
         <div class="quantity">
           <label>
@@ -79,19 +84,22 @@ export class ShoppingCartPage {
 
     itemDiv.querySelector(".minus").addEventListener("click", () => {
       if (item.quantity > 1) {
-        // Prevent quantity from going below 1
-        this.updateQuantity(item.id, item.quantity - 1);
+        this.updateQuantity(item.id, item.size, item.quantity - 1);
         this.renderItemList();
         saveCartToStorage(this.cart);
       }
     });
 
     itemDiv.querySelector(".plus").addEventListener("click", () => {
-      if (item.quantity < 100) {
-        this.updateQuantity(item.id, item.quantity + 1);
-        this.renderItemList();
-        saveCartToStorage(this.cart);
-      }
+      this.updateQuantity(item.id, item.size, item.quantity + 1);
+      this.renderItemList();
+      saveCartToStorage(this.cart);
+    });
+
+    itemDiv.querySelector(".btn-remove").addEventListener("click", () => {
+      this.removeItem(item.id, item.size);
+      saveCartToStorage(this.cart);
+      this.renderItemList();
     });
 
     this.attachItemEventListeners(itemDiv, item);
@@ -99,22 +107,22 @@ export class ShoppingCartPage {
     return itemDiv;
   }
 
-  updateQuantity(id, quant) {
+  updateQuantity(id, size, quant) {
     this.cart.forEach((item) => {
-      if (item.id === id) {
+      if (item.id === id && item.size === size) {
         item.quantity = quant;
       }
     });
   }
 
-  removeItem(id) {
-    let objIndex = this.cart.findIndex((item) => item.id === id);
-
-    if (objIndex !== -1) {
-      this.cart.splice(objIndex, 1);
+  removeItem(id, size) {
+    const index = this.cart.findIndex(
+      (item) => item.id === id && item.size === size
+    );
+    if (index !== -1) {
+      this.cart.splice(index, 1);
     }
   }
-
   toggle(id) {
     this.cart.forEach((item) => {
       if (item.id === id) {

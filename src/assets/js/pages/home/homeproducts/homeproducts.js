@@ -53,23 +53,25 @@ export function homeProducts() {
       }
 
       productElement.innerHTML = `
-        <img src="${product.image}" alt="${
-        product.title
-      }" class="product-image"/>
-        <div class="title-price">
-          <h3 class="product-title">${product.title}</h3>
-          <p class="product-price">$${product.price}</p>
-        </div>
-        <div class="size-selection">
-          ${
-            product.category !== "electronics"
-              ? `<label for="size">Size: </label>${sizeSelect.outerHTML}`
-              : "" // Render size dropdown only if not electronics
-          }
-        </div>
-        <div class="product-description hidden">
-        <h3>Description</h3>
-        <p >${product.description}</p>
+        <div class="product-content">
+          <img src="${product.image}" alt="${
+          product.title
+        }" class="product-image"/>
+          <div class="title-price">
+            <h3 class="product-title">${product.title}</h3>
+            <p class="product-price">$${product.price}</p>
+          </div>
+          <div class="size-selection">
+            ${
+              product.category !== "electronics"
+                ? `<label for="size">Size: </label>${sizeSelect.outerHTML}`
+                : "" // Render size dropdown only if not electronics
+            }
+          </div>
+          <div class="product-description hidden">
+            <h3>Description</h3>
+            <p >${product.description}</p>
+          </div>
         </div>
         <div class="svg-button">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-info">

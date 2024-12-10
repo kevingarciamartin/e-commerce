@@ -5,11 +5,13 @@
 }
 
 .product {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: var(--clr-card);
   border: 1px solid #ddd;
   padding: 1rem;
   border-radius: 24px;
-  /* max-width: 263px; */
 }
 .svg-info {
   fill: var(--clr-green);
@@ -114,6 +116,9 @@
   display: none;
 }
 .size-selection {
+  display: flex;
+  gap: 0.5rem;
+  
   font-size: var(--fs-product);
   font-family: var(--ff-inter);
   font-weight: 600;

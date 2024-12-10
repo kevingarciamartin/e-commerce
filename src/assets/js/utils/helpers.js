@@ -27,11 +27,17 @@ export const loadCartFromStorage = () => {
 
 export const addToCartFunction = (product) => {
   const cart = loadCartFromStorage();
-  let position = cart.findIndex((i) => i.id === product.id);
+
+  // Find if the product with the same ID and size exists
+  const position = cart.findIndex(
+    (item) => item.id === product.id && item.size === product.size
+  );
 
   if (position === -1) {
+    // If the product with this size does not exist, add it as a new entry
     saveCartToStorage([...cart, { ...product, quantity: 1 }]);
   } else {
+    // If the product with this size exists, increment its quantity
     cart[position].quantity += 1;
     saveCartToStorage(cart);
   }
@@ -39,4 +45,8 @@ export const addToCartFunction = (product) => {
 
 export function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function scrollToTop(scrollBehavior = "auto") {
+  window.scrollTo({ top: 0, behavior: scrollBehavior });
 }

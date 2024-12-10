@@ -1,84 +1,77 @@
-// Create and inject the search bar dynamically
-const header = document.createElement("header");
-header.classList.add("search-bar-container");
+import { renderShop } from "../../pages/shop/shop";
+import { scrollToTop } from "../../utils/helpers";
 
-// Search Bar Structure
-const searchBar = document.createElement("div");
-searchBar.classList.add("search-bar");
+export function renderModal() {
+  // Create the background overlay for modal
+  const modalBackground = document.createElement("div");
+  modalBackground.className = "modal-background";
+  modalBackground.style.position = "fixed";
+  modalBackground.style.top = "0";
+  modalBackground.style.left = "0";
+  modalBackground.style.width = "100%";
+  modalBackground.style.height = "100%";
+  modalBackground.style.backdropFilter = "blur(6px)";
+  modalBackground.style.zIndex = "999"; // Keep it above other content
+  modalBackground.style.display = "flex";
+  modalBackground.style.justifyContent = "center";
+  modalBackground.style.alignItems = "center";
+  modalBackground.style.pointerEvents = "all";  // Block interaction with other parts of the page
+  document.body.appendChild(modalBackground);
 
-const searchInput = document.createElement("input");
-searchInput.type = "text";
-searchInput.id = "search-bar";
-searchInput.placeholder = "Search";
-searchInput.setAttribute("aria-label", "Search");
+  // Create the confirmation container (green box)
+  const confirmationContainer = document.createElement("div");
+  confirmationContainer.style.backgroundColor = "#426b1f"; 
+  confirmationContainer.style.color = "white";
+  confirmationContainer.style.padding = "30px";
+  confirmationContainer.style.borderRadius = "10px";
+  confirmationContainer.style.textAlign = "center";
+  confirmationContainer.style.boxShadow = "0px 4px 6px rgba(0, 0, 0, 0.2)";
+  modalBackground.appendChild(confirmationContainer);
 
-const searchButton = document.createElement("button");
-searchButton.id = "search-btn";
+  // Add the "Thank you" message
+  const thankYouMessage = document.createElement("h1");
+  thankYouMessage.style.margin = '0'
+  thankYouMessage.textContent = "Thank you for shopping with us!";
+  confirmationContainer.appendChild(thankYouMessage);
 
-// Search Icon (SVG)
-searchButton.innerHTML = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85a1.007 1.007 0 0 0-.115-.098zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-  </svg>
-`;
+  // Add order message
+  const orderMessage = document.createElement("p");
+  orderMessage.textContent = "Your order will be processed and delivered shortly. We at Kenvorisa appreciate your business.";
+  orderMessage.style.marginTop = "10px";
+  orderMessage.style.fontSize = "18px";
+  confirmationContainer.appendChild(orderMessage);
 
-// Append elements to the search bar
-searchBar.appendChild(searchInput);
-searchBar.appendChild(searchButton);
+  // Create the "Continue shopping" button
+  const continueButton = document.createElement("button");
+  continueButton.textContent = "Continue shopping";
+  continueButton.style.marginTop = "20px";
+  continueButton.style.padding = "10px 20px";
+  continueButton.style.border = "none";
+  continueButton.style.borderRadius = "5px";
+  continueButton.style.backgroundColor = "white";
+  continueButton.style.color = "#426b1f";
+  continueButton.style.cursor = "pointer";
+  continueButton.style.fontSize = "16px";
+  continueButton.style.fontWeight = "bold";
+  confirmationContainer.appendChild(continueButton);
 
-// Append search bar to header
-header.appendChild(searchBar);
+  // Add the functionality for the button
+  continueButton.addEventListener("click", () => {
+    renderShop()
+    closeModal()
+    scrollToTop()
+  });
 
-// Append header to the body
-document.body.prepend(header);
-
-// Search Functionality
-const API_URL = "https://jsonplaceholder.typicode.com/posts";
-
-searchButton.addEventListener("click", async () => {
-  const query = searchInput.value.trim();
-
-  if (!query) {
-    alert("Please enter a search term.");
-    return;
+  // Function to close the modal and the dark background
+  function closeModal() {
+    modalBackground.style.display = "none"; // Hide the modal background
+    confirmationContainer.style.display = "none"; // Hide the confirmation container
   }
 
-  try {
-    const response = await fetch(API_URL); // No `q` parameter in jsonplaceholder
-    const data = await response.json();
-
-    // Filter results based on query (for demo purposes)
-    const filteredResults = data.filter((item) =>
-      item.title.toLowerCase().includes(query.toLowerCase())
-    );
-
-    displayResults(filteredResults);
-  } catch (error) {
-    console.error("Error fetching search results:", error);
-    alert("An error occurred while searching. Please try again.");
-  }
-});
-
-function displayResults(results) {
-  const resultsContainer = document.getElementById("results-container");
-  resultsContainer.innerHTML = ""; // Clear old results
-
-  if (results.length === 0) {
-    resultsContainer.innerHTML = "<p>No results found.</p>";
-    return;
-  }
-
-  results.forEach((result) => {
-    const resultItem = document.createElement("div");
-    resultItem.className = "result-item";
-    resultItem.textContent = result.title;
-    resultsContainer.appendChild(resultItem);
+  // Optionally, you can close the modal if the user clicks outside the confirmation box (on the background)
+  modalBackground.addEventListener("click", function(e) {
+    if (e.target === modalBackground) {
+      closeModal();
+    }
   });
 }
-
-// Trigger search on "Enter" key press
-searchInput.addEventListener("keypress", (event) => {
-  if (event.key === "Enter") {
-    searchButton.click();
-  }
-});

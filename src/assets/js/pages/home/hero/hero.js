@@ -1,6 +1,7 @@
 import "./hero.css";
 import hero from "../../../../images/Hero.jpg";
 import { renderShop } from "../../shop/shop.js";
+import { scrollToTop } from "../../../utils/helpers.js";
 
 export function renderHero() {
   const main = document.querySelector("main");
@@ -38,6 +39,7 @@ export function renderHero() {
   button.textContent = "Shop now";
   button.classList.add("hero-button");
   button.addEventListener("click", () => {
+    scrollToTop();
     renderShop();
   });
 

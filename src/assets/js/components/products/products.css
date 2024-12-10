@@ -135,5 +135,8 @@
   margin-top: 10px;
   line-height: 1.4;
   overflow: auto;
-  height: 252px;
+  height: 268px;
+}
+.product-description h3 {
+  margin-top: 0px;
 }

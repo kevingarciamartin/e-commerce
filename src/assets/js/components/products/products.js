@@ -84,7 +84,10 @@ export function renderProducts(
             : "" // Render size dropdown only if not electronics
         }
       </div>
-      <p class="product-description hidden">${product.description}</p>
+      <div class="product-description hidden">
+        <h3>Description</h3>
+        <p >${product.description}</p>
+        </div>
       <div class="svg-button">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-info">
           <title>information-outline</title>

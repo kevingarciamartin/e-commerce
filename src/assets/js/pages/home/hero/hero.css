@@ -31,7 +31,6 @@
   justify-content: center;
   flex-direction: column;
   color: var(--clr-neutral-900);
-  font-size: 4.5vw;
   font-weight: 800;
   font-family: var(--ff-poppins);
   text-align: center;
@@ -45,7 +44,6 @@
   flex-direction: column;
   text-align: center;
   color: var(--clr-neutral-900);
-  font-size: 4.5vw;
   font-weight: 800;
   font-family: var(--ff-poppins);
   margin-bottom: 100px;
@@ -56,6 +54,7 @@
 
 .hero-heading,
 .hero-heading-2 {
+  font-size: var(--fs-hero-heading);
   line-height: 0.6; /* Adjust line height for spacing */
 }
 
@@ -78,8 +77,8 @@
   color: white;
   border: none;
   border-radius: 20px;
-  padding: 0.52vw 4.13vw; /* Adjust padding */
-  font-size: 1.8vw;
+  padding: 1rem 4rem; /* Adjust padding */
+  font-size: var(--fs-btn-large);
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -88,7 +87,20 @@
 
 .hero-button:hover {
   background-color: var(--clr-green);
-  color: var(--clr-neutral-900);
+}
+
+@media (max-width: 1150px) {
+  .hero-heading,
+  .hero-heading-2 {
+    font-size: var(--fs-500);
+  }
+}
+
+@media (max-width: 950px) {
+  .hero-heading,
+  .hero-heading-2 {
+    font-size: 45px;
+  }
 }
 
 /* Media Query for 768px (Tablets) */
@@ -97,21 +109,8 @@
     height: calc(80vh - var(--header-height)); /* Adjust height for tablets */
   }
 
-  .hero-heading {
-    font-size: 4vw; /* Adjust font size for tablet */
-  }
-
-  .hero-heading-2 {
-    font-size: 4vw; /* Adjust font size for tablet */
-  }
-
   .line {
-    font-size: 4vw;
-  }
-
-  .hero-button {
-    font-size: 2vw; /* Adjust font size for tablet */
-    padding: 0.4vw 4vw; /* Adjust padding for tablet */
+    font-size: var(--fs-400); /* Adjust font size for tablet */
   }
 
   .heroimg {
@@ -120,31 +119,24 @@
 
   /* Bring heading and button closer for tablets */
   .hero-heading {
-    margin-bottom: -50px; /* Reduced margin for closer text and button */
+    margin-bottom: -50px;
   }
 
   .hero-button {
-    margin-top: 10px; /* Reduce margin between button and text */
+    margin-top: 10px;
+    font-size: var(--fs-btn-small);
   }
 }
 
-/* Media Query for 480px (Mobile Phones) */
-@media (max-width: 480px) {
-  .hero-heading {
-    font-size: 5vw; /* Adjust font size for mobile */
-  }
-
+/* Media Query for 550px (Mobile Phones) */
+@media (max-width: 550px) {
   .line {
-    font-size: 5vw;
-  }
-
-  .hero-heading-2 {
-    font-size: 5vw; /* Adjust font size for mobile */
+    font-size: var(--fs-300);
   }
 
   .hero-button {
-    font-size: 2vw; /* Adjust font size for mobile */
-    padding: 1vw 4vw; /* Adjust padding for mobile */
+    font-size: var(--fs-btn-small); /* Adjust font size for mobile */
+    /* padding: 1vw 4vw; Adjust padding for mobile */
   }
 
   .heroimg {

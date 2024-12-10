@@ -19,7 +19,7 @@ export function scrollToTopButton() {
     const scrollPercentage =
       window.scrollY /
       (document.documentElement.scrollHeight - window.innerHeight);
-    const scale = Math.min(scrollPercentage * 3, 1);
+    const scale = Math.min(scrollPercentage * 3, 0.999);
 
     button.style.transform = `scale(${scale})`;
   });

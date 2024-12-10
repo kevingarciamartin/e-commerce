@@ -1,6 +1,6 @@
 import "./searchbar.css";
+
 export function renderSearchbar() {
-  // Create and inject the search bar dynamically
   const searchBarWrapper = document.getElementById("search-bar-wrapper");
 
   // Search Bar Structure
@@ -10,7 +10,7 @@ export function renderSearchbar() {
   const searchInput = document.createElement("input");
   searchInput.type = "text";
   searchInput.id = "search-bar";
-  searchInput.placeholder = "Search";
+  searchInput.placeholder = "Search...";
   searchInput.setAttribute("aria-label", "Search");
 
   const searchButton = document.createElement("button");
@@ -26,16 +26,83 @@ export function renderSearchbar() {
   // Append elements to the search bar
   searchBar.appendChild(searchInput);
   searchBar.appendChild(searchButton);
-
-  // Append search bar to wrapper
   searchBarWrapper.appendChild(searchBar);
 
+  const resultsContainer = document.createElement("div");
+  resultsContainer.id = "results-container";
+  searchBarWrapper.appendChild(resultsContainer);
+
+  // API
+  let products = [];
+  fetch("https://fakestoreapi.com/products")
+    .then((response) => response.json())
+    .then((data) => {
+      products = data;
+    })
+    .catch((error) => {
+      console.error("Error fetching products:", error);
+    });
+
+  // Event Listener
   searchButton.addEventListener("click", () => {
+    resultsContainer.style.display = "block";
+    
     const searchValue = searchInput.value.trim().toLowerCase();
-    console.log(searchValue);
+    const results = products.filter((product) =>
+      product.title.toLowerCase().includes(searchValue)
+  );
+  
+  displayResults(results, resultsContainer);
+});
 
+// Event Listener for Enter key press
+searchInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+      resultsContainer.style.display = "block";
+      
+      const searchValue = searchInput.value.trim().toLowerCase();
+      const results = products.filter((product) =>
+        product.title.toLowerCase().includes(searchValue)
+      );
 
+      displayResults(results, resultsContainer);
+    }
+  });
 
-   
-  })
+  // Hide results when clicking outside
+  document.addEventListener("click", (event) => {
+    const isClickInsideSearchbar = searchBarWrapper.contains(event.target);
+
+    if (!isClickInsideSearchbar) {
+      resultsContainer.innerHTML = ""; // Clear search results
+      resultsContainer.style.display = "none";
+      searchInput.value = "";
+    }
+  });
+}
+
+function displayResults(results, container) {
+  container.innerHTML = "";
+
+  if (results.length === 0) {
+    container.innerHTML = "<p>No products found.</p>";
+    return;
+  }
+
+  const ul = document.createElement("ul");
+  results.forEach((product) => {
+    const li = document.createElement("li");
+    li.style.cursor = "pointer"; // Add cursor to indicate clickability
+    li.innerHTML = `
+      <div>
+        <img src="${product.image}" alt="${product.title}" style="width: 50px; height: 50px;"/>
+        <strong>${product.title}</strong>
+        <p>Price: $${product.price}</p>
+      </div>
+    `;
+
+    ul.appendChild(li);
+  });
+
+  container.appendChild(ul);
 }
